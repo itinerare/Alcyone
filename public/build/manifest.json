@@ -1,0 +1,20 @@
+{
+  "resources/css/app.scss": {
+    "file": "assets/app-7a80d7f0.css",
+    "isEntry": true,
+    "src": "resources/css/app.scss"
+  },
+  "resources/fonts/Lato-Regular.ttf": {
+    "file": "assets/Lato-Regular-7ae714b6.ttf",
+    "src": "resources/fonts/Lato-Regular.ttf"
+  },
+  "resources/fonts/RobotoCondensed-Regular.ttf": {
+    "file": "assets/RobotoCondensed-Regular-6a2cfb7e.ttf",
+    "src": "resources/fonts/RobotoCondensed-Regular.ttf"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-f47619c2.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}

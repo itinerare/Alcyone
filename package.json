@@ -7,14 +7,14 @@
         "format": "./node_modules/.bin/blade-formatter --progress --write '**/*.blade.php'"
     },
     "devDependencies": {
+        "@popperjs/core": "^2.11.8",
         "axios": "^1.5.1",
+        "blade-formatter": "^1.38.1",
         "bootstrap": "^4.6",
+        "jquery": "^3.7",
         "laravel-vite-plugin": "^0.8.1",
         "lodash": "^4.17.19",
         "postcss": "^8.4.31",
-        "sass": "^1.68.0",
-        "vite": "^4.4.9",
-        "blade-formatter": "^1.38.1",
-        "jquery": "^3.7"
+        "sass": "^1.68.0"
     }
 }

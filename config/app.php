@@ -159,6 +159,9 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\FortifyServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -168,6 +171,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\NotificationsProvider::class,
     ])->toArray(),
 
     /*

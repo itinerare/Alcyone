@@ -2,39 +2,48 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\User;
+use App\Models\User\InvitationCode;
+use App\Models\User\Rank;
+use App\Models\User\User;
+use App\Services\InvitationService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
-class CreateNewUser implements CreatesNewUsers
-{
+class CreateNewUser implements CreatesNewUsers {
     use PasswordValidationRules;
 
     /**
      * Validate and create a newly registered user.
      *
-     * @param  array<string, string>  $input
+     * @return \App\Models\User\User
      */
-    public function create(array $input): User
-    {
+    public function create(array $input) {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique(User::class),
+            'name'      => ['required', 'string', 'min:3', 'max:25', 'alpha_dash', 'unique:users'],
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'agreement' => ['required', 'accepted'],
+            'password'  => ['required', 'string', 'min:8', 'confirmed'],
+            'code'      => ['string', function ($attribute, $value, $fail) {
+                $invitation = InvitationCode::where('code', $value)->whereNull('recipient_id')->first();
+                if (!$invitation) {
+                    $fail('Invalid code entered.');
+                }
+            },
             ],
-            'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
+        $user = User::create([
+            'name'     => $input['name'],
+            'email'    => $input['email'],
             'password' => Hash::make($input['password']),
+            'rank_id'  => Rank::orderBy('sort', 'ASC')->first()->id,
         ]);
+
+        if (!(new InvitationService)->useInvitation(InvitationCode::where('code', $input['code'])->whereNull('recipient_id')->first(), $user)) {
+            throw new \Exception('An error occurred while using the invitation code.');
+        }
+
+        return $user;
     }
 }

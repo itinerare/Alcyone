@@ -54,7 +54,7 @@ class Rank extends Model {
      *
      * @return bool
      */
-    public function getCanWriteAttribute() {
+    public function getIsModAttribute() {
         if ($this->id == self::orderBy('sort', 'DESC')->skip(1)->first()->id || $this->isAdmin) {
             return true;
         }

@@ -87,11 +87,33 @@ class User extends Authenticatable implements MustVerifyEmail {
     }
 
     /**
+     * Checks if the user has an admin rank.
+     *
+     * @return bool
+     */
+    public function getIsModAttribute() {
+        if ($this->is_banned) {
+            return false;
+        }
+
+        return $this->rank->isMod;
+    }
+
+    /**
      * Displays the user's name, linked to their profile page.
      *
      * @return string
      */
     public function getDisplayNameAttribute() {
         return ($this->is_banned ? '<strike>' : '').'<a href="'.$this->url.'" class="display-user">'.$this->name.'</a>'.($this->is_banned ? '</strike>' : '');
+    }
+
+    /**
+     * Gets the URL for editing the user in the admin panel.
+     *
+     * @return string
+     */
+    public function getAdminUrlAttribute() {
+        return url('admin/users/'.$this->name.'/edit');
     }
 }

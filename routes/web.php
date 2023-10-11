@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\InvitationController;
+use App\Http\Controllers\Admin\RankController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -27,12 +31,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 
     Route::controller(AccountController::class)->group(function () {
-        Route::prefix('account')->group( function () {
+        Route::prefix('account')->group(function () {
             Route::get('settings', 'getSettings');
-            Route::post('profile', 'postProfile');
-            Route::post('password', 'postPassword');
             Route::post('email', 'postEmail');
-            Route::post('avatar', 'postAvatar');
+            Route::post('password', 'postPassword');
 
             Route::get('two-factor/confirm', 'getConfirmTwoFactor');
             Route::post('two-factor/enable', 'postEnableTwoFactor');
@@ -40,7 +42,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::post('two-factor/disable', 'postDisableTwoFactor');
         });
 
-        Route::prefix('notifications')->group( function () {
+        Route::prefix('notifications')->group(function () {
             Route::get('/', 'getNotifications');
             Route::get('delete/{id}', 'getDeleteNotification');
             Route::post('clear', 'postClearNotifications');
@@ -50,11 +52,39 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     /* Routes that require moderator permissions */
     Route::group(['middleware' => ['mod']], function () {
-        //
+        Route::prefix('admin')->group(function () {
+            Route::controller(AdminController::class)->group(function () {
+                Route::get('/', 'getIndex');
+            });
 
-        /* Routes that require admin permissions */
-        Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['admin']], function () {
-            //
+            /* Routes that require admin permissions */
+            Route::group(['middleware' => ['admin']], function () {
+                Route::controller(RankController::class)->prefix('ranks')->group(function () {
+                    Route::get('/', 'getIndex');
+                    Route::get('edit/{id}', 'getEditRank');
+                    Route::post('edit/{id?}', 'postEditRank');
+                });
+
+                Route::controller(InvitationController::class)->prefix('invitations')->group(function () {
+                    Route::get('/', 'getIndex');
+                    Route::post('create', 'postGenerateKey');
+                    Route::post('delete/{id?}', 'postDeleteKey');
+                });
+
+                Route::controller(UserController::class)->prefix('users')->group(function () {
+                    Route::get('/', 'getUserIndex');
+                    Route::get('{name}/edit', 'getUser');
+                    Route::get('{name}/updates', 'getUserUpdates');
+                    Route::post('{name}/basic', 'postUserBasicInfo');
+                    Route::post('{name}/account', 'postUserAccount');
+
+                    Route::get('{name}/ban', 'getBan');
+                    Route::get('{name}/ban-confirm', 'getBanConfirmation');
+                    Route::post('{name}/ban', 'postBan');
+                    Route::get('{name}/unban-confirm', 'getUnbanConfirmation');
+                    Route::post('{name}/unban', 'postUnban');
+                });
+            });
         });
     });
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Report;
 
 class AdminController extends Controller {
     /*
@@ -20,6 +21,8 @@ class AdminController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getIndex() {
-        return view('admin.index');
+        return view('admin.index', [
+            'reportsCount' => Report::where('status', 'Pending')->count(),
+        ]);
     }
 }

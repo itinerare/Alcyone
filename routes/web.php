@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\InvitationController;
 use App\Http\Controllers\Admin\RankController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::prefix('admin')->group(function () {
             Route::controller(AdminController::class)->group(function () {
                 Route::get('/', 'getIndex');
+            });
+
+            Route::controller(ReportController::class)->prefix('reports')->group(function () {
+                Route::get('/', 'getReportIndex');
+                Route::get('/{status}', 'getReportIndex')->where('status', 'pending|processed');
             });
 
             /* Routes that require admin permissions */

@@ -11,16 +11,34 @@
 
     <div class="card mb-4">
         <div class="card-body">
+            <h3>Theme</h3>
+
+            {!! Form::open(['url' => 'account/theme']) !!}
+            <div class="mb-3 row">
+                <label class="col-md-2 col-form-label">Theme</label>
+                <div class="col-md-10">
+                    {!! Form::select('theme', ['dark' => 'Dark', 'light' => 'Light'], Auth::user()->theme, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            <div class="text-end">
+                {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
             <h3>Email Address</h3>
 
             {!! Form::open(['url' => 'account/email']) !!}
-            <div class="form-group row">
+            <div class="mb-3 row">
                 <label class="col-md-2 col-form-label">Email Address</label>
                 <div class="col-md-10">
                     {!! Form::text('email', Auth::user()->email, ['class' => 'form-control']) !!}
                 </div>
             </div>
-            <div class="text-right">
+            <div class="text-end">
                 {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
             </div>
             {!! Form::close() !!}
@@ -32,25 +50,25 @@
             <h3>Change Password</h3>
 
             {!! Form::open(['url' => 'account/password']) !!}
-            <div class="form-group row">
+            <div class="mb-3 row">
                 <label class="col-md-2 col-form-label">Old Password</label>
                 <div class="col-md-10">
                     {!! Form::password('old_password', ['class' => 'form-control']) !!}
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="mb-3 row">
                 <label class="col-md-2 col-form-label">New Password</label>
                 <div class="col-md-10">
                     {!! Form::password('new_password', ['class' => 'form-control']) !!}
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="mb-3 row">
                 <label class="col-md-2 col-form-label">Confirm New Password</label>
                 <div class="col-md-10">
                     {!! Form::password('new_password_confirmation', ['class' => 'form-control']) !!}
                 </div>
             </div>
-            <div class="text-right">
+            <div class="text-end">
                 {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
             </div>
             {!! Form::close() !!}
@@ -70,7 +88,7 @@
                     on your phone. Two-factor authentication will not be enabled until you do so and confirm by entering one
                     of the codes provided by your authentication app.</p>
                 {!! Form::open(['url' => 'account/two-factor/enable']) !!}
-                <div class="text-right">
+                <div class="text-end">
                     {!! Form::submit('Enable', ['class' => 'btn btn-primary']) !!}
                 </div>
                 {!! Form::close() !!}
@@ -80,13 +98,13 @@
                 <h4>Disable Two-Factor Authentication</h4>
                 <p>To disable two-factor authentication, you must enter a code from your authenticator app.</p>
                 {!! Form::open(['url' => 'account/two-factor/disable']) !!}
-                <div class="form-group row">
+                <div class="mb-3 row">
                     <label class="col-md-2 col-form-label">Code</label>
                     <div class="col-md-10">
                         {!! Form::text('code', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
-                <div class="text-right">
+                <div class="text-end">
                     {!! Form::submit('Disable', ['class' => 'btn btn-primary']) !!}
                 </div>
                 {!! Form::close() !!}

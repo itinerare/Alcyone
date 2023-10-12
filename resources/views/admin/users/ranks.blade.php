@@ -36,7 +36,7 @@
                     <td>{!! $rank->name !!}</td>
                     <td>{!! $rank->description !!}</td>
                     <td>
-                        <a href="#" class="btn btn-primary edit-rank-button" data-id="{{ $rank->id }}">Edit</a>
+                        <a href="#" class="btn btn-primary edit-rank-button float-end" data-id="{{ $rank->id }}" data-bs-toggle="modal" data-bs-target="#modal">Edit</a>
                     </td>
                 </tr>
             @endforeach
@@ -47,7 +47,7 @@
 
 @section('scripts')
     @parent
-    <script>
+    <script type="module">
         $(document).ready(function() {
             $('.edit-rank-button').on('click', function(e) {
                 e.preventDefault();

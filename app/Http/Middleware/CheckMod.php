@@ -13,7 +13,7 @@ class CheckMod {
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        if (!$request->user()->isMod) {
+        if (!$request->user() || !$request->user()->isMod) {
             flash('You do not have the permission to access this page.')->error();
 
             return redirect('/');

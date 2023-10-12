@@ -18,9 +18,8 @@
         </li>
     </ul>
 
-    {!! Form::open(['method' => 'GET', 'class' => 'form-inline justify-content-end']) !!}
-    <div class="form-inline justify-content-end">
-        <div class="form-group ml-3 mb-3">
+    {!! Form::open(['method' => 'GET', 'class' => 'd-flex justify-content-end']) !!}
+        <div class="mb-3">
             {!! Form::select(
                 'sort',
                 [
@@ -31,15 +30,14 @@
                 ['class' => 'form-control'],
             ) !!}
         </div>
-        <div class="form-group ml-3 mb-3">
+        <div class="ms-2 mb-3">
             {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
         </div>
-    </div>
     {!! Form::close() !!}
 
     {!! $reports->render() !!}
 
-    <div class="row ml-md-2">
+    <div class="row ms-md-2">
         <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">
             <div class="col-12 col-md-2 font-weight-bold">Image</div>
             <div class="col-6 col-md-3 font-weight-bold">Uploader</div>
@@ -55,7 +53,7 @@
                 <div class="col-3 col-md-2">{!! $report->email ?? '<i>None</i>' !!}</div>
                 <div class="col-6 col-md-2">{!! pretty_date($report->created_at) !!}</div>
                 <div class="col-3 col-md">
-                    <span class="btn btn-{{ $report->status == 'Pending' ? 'warning' : 'secondary') }} btn-sm py-0 px-1">{{ $report->status }}</span>
+                    <span class="btn btn-{{ $report->status == 'Pending' ? 'warning' : 'secondary' }} btn-sm py-0 px-1">{{ $report->status }}</span>
                 </div>
                 <div class="col-3 col-md-1"><a href="{{ $report->adminUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a></div>
             </div>

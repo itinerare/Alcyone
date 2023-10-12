@@ -13,6 +13,7 @@ use BaconQrCode\Writer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\TwoFactorAuthenticationProvider;
 use Laravel\Fortify\RecoveryCode;
 
@@ -53,28 +54,14 @@ class AccountController extends Controller {
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postProfile(Request $request) {
-        Auth::user()->update([
-            'profile_text' => $request->get('profile_text'),
+    public function postTheme(Request $request) {
+        $request->validate([
+            'theme' => 'required', Rule::in(['dark', 'light']),
         ]);
-        flash('Profile updated successfully.')->success();
-
-        return redirect()->back();
-    }
-
-    /**
-     * Edits the user's avatar.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postAvatar(Request $request, UserService $service) {
-        if ($service->updateAvatar($request->file('avatar'), Auth::user())) {
-            flash('Avatar updated successfully.')->success();
-        } else {
-            foreach ($service->errors()->getMessages()['error'] as $error) {
-                $service->addError($error);
-            }
-        }
+        Auth::user()->update([
+            'theme' => $request->get('theme'),
+        ]);
+        flash('Theme updated successfully.')->success();
 
         return redirect()->back();
     }

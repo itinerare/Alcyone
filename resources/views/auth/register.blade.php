@@ -14,8 +14,8 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">Username</label>
+            <div class="mb-3 row">
+                <label for="name" class="col-md-4 col-form-label text-md-end">Username</label>
 
                 <div class="col-md-6">
                     <input id="name" type="text"
@@ -30,8 +30,8 @@
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">E-mail Address</label>
+            <div class="mb-3 row">
+                <label for="email" class="col-md-4 col-form-label text-md-end">E-mail Address</label>
 
                 <div class="col-md-6">
                     <input id="email" type="email"
@@ -46,8 +46,8 @@
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+            <div class="mb-3 row">
+                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                 <div class="col-md-6">
                     <input id="password" type="password"
@@ -62,9 +62,9 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="mb-3 row">
                 <label for="password-confirm"
-                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                    class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                 <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
@@ -72,8 +72,8 @@
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">Invitation Key
+            <div class="mb-3 row">
+                <label for="name" class="col-md-4 col-form-label text-md-end">Invitation Key
                     {!! add_help('An invitation key is required to create an account.') !!}</label>
 
                 <div class="col-md-6">
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="mb-3 row">
                 <div class="col-md-6 offset-md-4">
                     <div class="form-check">
                         <label class="form-check-label">
@@ -101,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="form-group row mb-0">
+            <div class="mb-3 row mb-0">
                 <div class="col-md-6 offset-md-4">
                     <button type="submit" class="btn btn-primary">
                         {{ __('Register') }}

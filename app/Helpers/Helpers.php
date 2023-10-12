@@ -29,7 +29,7 @@ function set_active($path, $class = 'active') {
  * @return string
  */
 function add_help($text) {
-    return '<i class="fas fa-question-circle help-icon" data-toggle="tooltip" title="'.$text.'"></i>';
+    return '<i class="fas fa-question-circle help-icon text-info" data-bs-toggle="tooltip" title="'.$text.'"></i>';
 }
 
 /**
@@ -78,7 +78,7 @@ function breadcrumbs($links) {
  * @return string
  */
 function format_date($timestamp, $showTime = true) {
-    return $timestamp->format('j F Y'.($showTime ? ', H:i:s' : '')).($showTime ? ' <abbr data-toggle="tooltip" title="UTC'.$timestamp->timezone->toOffsetName().'">'.strtoupper($timestamp->timezone->getAbbreviatedName($timestamp->isDST())).'</abbr>' : '');
+    return $timestamp->format('j F Y'.($showTime ? ', H:i:s' : '')).($showTime ? ' <abbr data-bs-toggle="tooltip" title="UTC'.$timestamp->timezone->toOffsetName().'">'.strtoupper($timestamp->timezone->getAbbreviatedName($timestamp->isDST())).'</abbr>' : '');
 }
 
 /**
@@ -90,7 +90,7 @@ function format_date($timestamp, $showTime = true) {
  * @return string
  */
 function pretty_date($timestamp, $showTime = true) {
-    return '<abbr data-toggle="tooltip" title="'.$timestamp->format('F j Y'.($showTime ? ', H:i:s' : '')).' '.strtoupper($timestamp->timezone->getAbbreviatedName($timestamp->isDST())).'">'.$timestamp->diffForHumans().'</abbr>';
+    return '<abbr data-bs-toggle="tooltip" title="'.$timestamp->format('F j Y'.($showTime ? ', H:i:s' : '')).' '.strtoupper($timestamp->timezone->getAbbreviatedName($timestamp->isDST())).'">'.$timestamp->diffForHumans().'</abbr>';
 }
 
 /**

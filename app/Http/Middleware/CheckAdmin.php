@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CheckAdmin {
     /**
@@ -13,7 +14,7 @@ class CheckAdmin {
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        if (!$request->user()->isAdmin) {
+        if (!$request->user() || !$request->user()->isAdmin) {
             flash('You do not have the permission to access this page.')->error();
 
             return redirect('/');

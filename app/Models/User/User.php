@@ -2,6 +2,8 @@
 
 namespace App\Models\User;
 
+use App\Models\ImageUpload;
+use App\Models\Notification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail {
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'email', 'password', 'rank_id',
+        'name', 'email', 'password', 'rank_id', 'theme',
         'is_banned', 'ban_reason', 'banned_at',
     ];
 
@@ -47,24 +49,24 @@ class User extends Authenticatable implements MustVerifyEmail {
     **********************************************************************************************/
 
     /**
-     * Get user settings.
-     */
-    public function settings() {
-        return $this->hasOne('App\Models\User\UserSettings');
-    }
-
-    /**
      * Get the user's rank data.
      */
     public function rank() {
-        return $this->belongsTo('App\Models\User\Rank');
+        return $this->belongsTo(Rank::class);
     }
 
     /**
      * Get the user's notifications.
      */
     public function notifications() {
-        return $this->hasMany('App\Models\Notification');
+        return $this->hasMany(Notification::class);
+    }
+
+    /**
+     * Get the user's images.
+     */
+    public function images() {
+        return $this->hasMany(ImageUpload::class);
     }
 
     /**********************************************************************************************

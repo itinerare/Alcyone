@@ -24,13 +24,13 @@
 
     <h3>Basic Info</h3>
     {!! Form::open(['url' => 'admin/users/' . $user->name . '/basic']) !!}
-    <div class="form-group row">
+    <div class="mb-3 row">
         <label class="col-md-2 col-form-label">Username</label>
         <div class="col-md-10">
             {!! Form::text('name', $user->name, ['class' => 'form-control']) !!}
         </div>
     </div>
-    <div class="form-group row">
+    <div class="mb-3 row">
         <label class="col-md-2 col-form-label">Rank
             @if ($user->isAdmin)
                 {!! add_help('The rank of the admin user cannot be edited.') !!}
@@ -44,7 +44,7 @@
             @endif
         </div>
     </div>
-    <div class="text-right">
+    <div class="text-end">
         {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
@@ -52,19 +52,19 @@
     <h3>Account</h3>
 
     {!! Form::open(['url' => 'admin/users/' . $user->name . '/account']) !!}
-    <div class="form-group row">
+    <div class="mb-3 row">
         <label class="col-md-2 col-form-label">Email Address</label>
         <div class="col-md-10">
             {!! Form::text('email', $user->email, ['class' => 'form-control', 'disabled']) !!}
         </div>
     </div>
-    <div class="form-group row">
+    <div class="mb-3 row">
         <label class="col-md-2 col-form-label">Join Date</label>
         <div class="col-md-10">
             {!! Form::text('created_at', format_date($user->created_at, false), ['class' => 'form-control', 'disabled']) !!}
         </div>
     </div>
-    <div class="text-right">
+    <div class="text-end">
         {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}

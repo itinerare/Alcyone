@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::controller(AccountController::class)->group(function () {
         Route::prefix('account')->group(function () {
             Route::get('settings', 'getSettings');
+            Route::post('theme', 'postTheme');
             Route::post('email', 'postEmail');
             Route::post('password', 'postPassword');
 

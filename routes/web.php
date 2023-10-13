@@ -20,15 +20,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(Controller::class)->prefix('info')->group(function () {
-    Route::get('terms', 'getTerms');
-    Route::get('privacy', 'getPrivacyPolicy');
+Route::controller(Controller::class)->group(function () {
+    Route::prefix('info')->group(function () {
+        Route::get('terms', 'getTerms');
+        Route::get('privacy', 'getPrivacyPolicy');
+    });
+
+    Route::get('images/converted/{slug}', 'getConvertedImage')
+        ->whereAlphaNumeric('slug');
 });
 
 /* Routes that require login */
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::controller(Controller::class)->group(function () {
         Route::get('/', 'getIndex');
+
+        Route::prefix('images')->group(function () {
+            Route::get('view/{slug}', 'getImage')
+                ->whereAlphaNumeric('slug');
+            Route::post('upload', 'postUploadImage');
+            Route::post('delete/{slug}', 'postDeleteImage')
+                ->whereAlphaNumeric('slug');
+        });
     });
 
     Route::controller(AccountController::class)->group(function () {

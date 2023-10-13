@@ -11,3 +11,13 @@ function loadModal(url, title) {
         }
     });
 }
+
+async function copyUrl(target, url) {
+    await window.navigator.clipboard.writeText(url);
+    target.removeClass('toCopy');
+    target.addClass('toCheck');
+    setTimeout(() => {
+        target.removeClass('toCheck');
+        target.addClass('toCopy');
+    }, 2000);
+}

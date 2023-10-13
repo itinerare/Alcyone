@@ -18,6 +18,8 @@ class Kernel extends ConsoleKernel {
             $schedule->command('backup:monitor')
                 ->daily()->at('01:40');
         }
+        $schedule->command('app:process-cache-expiry')
+            ->everyMinute();
     }
 
     /**

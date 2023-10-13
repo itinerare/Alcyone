@@ -46,8 +46,10 @@ return [
     */
 
     // Image dimensions, in px. Note that these settings are not retroactive!
-    'thumbnail_height'   => 200,
-    'display_image_size' => 2000,
+    'thumbnail_height' => 200,
+
+    // Hours that converted images are held for before being deleted.
+    'cache_lifetime' => 24,
 
     /*
     |--------------------------------------------------------------------------

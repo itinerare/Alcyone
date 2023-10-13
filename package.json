@@ -16,5 +16,8 @@
         "lodash": "^4.17.19",
         "postcss": "^8.4.31",
         "sass": "^1.68.0"
+    },
+    "dependencies": {
+        "magnific-popup": "^1.1.0"
     }
 }

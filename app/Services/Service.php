@@ -144,10 +144,6 @@ abstract class Service {
         return false;
     }
 
-    public function deleteImage($dir, $name) {
-        unlink($dir.'/'.$name);
-    }
-
     /**
      * Add an error to Laravel session $errors.
      *

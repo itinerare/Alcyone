@@ -4,6 +4,8 @@ window._ = _;
 import jQuery from 'jquery';
 window.$ = jQuery;
 
+import * as magnific from 'magnific-popup';
+
 import * as bootstrap from 'bootstrap';
 window.bootstrap = bootstrap;
 

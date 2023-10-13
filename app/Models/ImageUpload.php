@@ -9,7 +9,7 @@ class ImageUpload extends Model {
      * @var array
      */
     protected $fillable = [
-        'user_id', 'key', 'hash', 'fullsize_hash', 'extension',
+        'user_id', 'key', 'cache_expiry',
     ];
 
     /**
@@ -18,6 +18,15 @@ class ImageUpload extends Model {
      * @var string
      */
     protected $table = 'image_uploads';
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'cache_expiry' => 'datetime',
+    ];
 
     /**
      * Whether the model contains timestamps to be saved and updated.
@@ -33,7 +42,7 @@ class ImageUpload extends Model {
      */
     public static $createRules = [
         //
-        'image' => 'required|mimes:png,jpg,jpeg,gif,webp|max:10000',
+        'image' => 'required|mimes:png,jpg,jpeg,gif,webp|max:17000',
     ];
 
     /**********************************************************************************************
@@ -56,12 +65,21 @@ class ImageUpload extends Model {
     **********************************************************************************************/
 
     /**
+     * Gets the path to the file directory containing the model's thumbnail image.
+     *
+     * @return string
+     */
+    public function getSlugAttribute() {
+        return $this->id.$this->key;
+    }
+
+    /**
      * Gets the file directory containing the model's image.
      *
      * @return string
      */
     public function getImageDirectoryAttribute() {
-        return 'images/pieces/'.floor($this->id / 1000);
+        return 'images/uploads/'.floor($this->id / 1000);
     }
 
     /**
@@ -70,7 +88,7 @@ class ImageUpload extends Model {
      * @return string
      */
     public function getImageFileNameAttribute() {
-        return $this->id.'_'.$this->hash.'.'.($this->display_extension ?? $this->extension);
+        return $this->slug.'.webp';
     }
 
     /**
@@ -92,12 +110,48 @@ class ImageUpload extends Model {
     }
 
     /**
+     * Gets the file directory containing the model's image.
+     *
+     * @return string
+     */
+    public function getConvertedDirectoryAttribute() {
+        return 'images/cache/'.floor($this->id / 1000);
+    }
+
+    /**
+     * Gets the file name of the model's image.
+     *
+     * @return string
+     */
+    public function getConvertedFileNameAttribute() {
+        return $this->slug.'.png';
+    }
+
+    /**
+     * Gets the path to the file directory containing the model's image.
+     *
+     * @return string
+     */
+    public function getConvertedPathAttribute() {
+        return public_path($this->convertedDirectory);
+    }
+
+    /**
+     * Gets the URL of the model's image.
+     *
+     * @return string
+     */
+    public function getConvertedUrlAttribute() {
+        return asset($this->convertedDirectory.'/'.$this->convertedFileName);
+    }
+
+    /**
      * Gets the file name of the model's thumbnail image.
      *
      * @return string
      */
     public function getThumbnailFileNameAttribute() {
-        return $this->id.'_'.$this->hash.'_th.'.($this->display_extension ?? $this->extension);
+        return $this->slug.'_th.webp';
     }
 
     /**

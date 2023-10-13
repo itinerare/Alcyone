@@ -4,6 +4,9 @@
 // Bootstrap
 @import '../node_modules/bootstrap/scss/bootstrap';
 
+// Magnific Popup
+@import '../node_modules/magnific-popup/src/css/main';
+
 /**************************************************************************************************
 
     Fonts
@@ -55,12 +58,174 @@ body {
 
 **************************************************************************************************/
 
-.hide {
-    display: none !important;
+a {-webkit-transition: all .3s ease-in-out; -o-transition: all .3s ease-in-out; transition: all .3s ease-in-out;}
+.navbar ul {-webkit-transition: all .5s ease-in-out; -o-transition: all .5s ease-in-out; transition: all .5s ease-in-out;}
+
+.grecaptcha-badge { display:none !important; }
+
+.container{
+    padding: 0;
+    position:relative;
+}
+@media screen and (max-width: 640px){
+    .container{
+      width: 100%;
+    }
 }
 
-.mobile-show {
-    display:none;
+.image-badge {
+    position: absolute;
+    text-align: center;
+    padding:5px 10px;
+    z-index:4;
+    right:0;
+    border-radius: 0 0 0 .5em;
+}
+
+.content {
+    display: inline-block;
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    overflow: hidden;
+    background: #F7F7F7;
+    border-radius: .25em;
+}
+
+.content .content-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    -moz-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
+    border-radius: .25em;
+}
+
+.content:hover .content-overlay{
+    opacity: 1;
+}
+
+.content-details {
+    position: absolute;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.content:hover .content-details{
+    top: 60%;
+    left: 50%;
+    opacity: 1;
+}
+
+.content-details h3{
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5em;
+}
+
+.fadeIn-bottom{
+    top: 80%;
+}
+
+.skip a {
+    position:absolute;
+    left:-10000px !important;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+
+.skip a:focus {
+    position:static;
+    width:auto;
+    height:auto;
+    padding:8px 16px;
+    float:left;
+    width:auto;
+    border:none;
+    display:block;
+    outline:0;
+}
+
+@keyframes copy-to-check {
+    from {
+        opacity: 1;
+        content: '\f0c5';
+        font-weight: 400;
+    }
+    50% {
+        opacity: 0;
+        content: '\f0c5';
+        font-weight: 400;
+    }
+    51% {
+        opacity: 0;
+        content: '\f00c';
+        font-weight: 900;
+    }
+    to {
+        opacity: 1;
+        content: '\f00c';
+        font-weight: 900;
+    }
+}
+
+@keyframes check-to-copy {
+    from {
+        opacity: 1;
+        content: '\f00c';
+        font-weight: 900;
+    }
+    50% {
+        opacity: 0;
+        content: '\f00c';
+        font-weight: 900;
+    }
+    51% {
+        opacity: 0;
+        content: '\f0c5';
+        font-weight: 400;
+    }
+    to {
+        opacity: 1;
+        content: '\f0c5';
+        font-weight: 400;
+    }
+}
+
+.toCheck::before {
+    animation-name: copy-to-check;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.toCopy::before {
+    animation-name: check-to-copy;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+}
+
+.mfp-close {
+    color: $cyan !important;
 }
 
 /**************************************************************************************************
@@ -110,12 +275,8 @@ main > .row {
     padding: 10px 20px;
 }
 
-.timeline-section-left {
-    border-width: 0 10px 0 0 !important;
-}
-
-.timeline-section-right {
-    border-width: 0 0 0 0 !important;
+.card {
+    border: 0;
 }
 
 @media (max-width: 767px) {

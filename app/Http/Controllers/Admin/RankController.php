@@ -14,7 +14,7 @@ class RankController extends Controller {
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getIndex() {
+    public function getIndex(Request $request) {
         return view('admin.users.ranks', [
             'ranks' => Rank::orderBy('sort', 'DESC')->get(),
         ]);

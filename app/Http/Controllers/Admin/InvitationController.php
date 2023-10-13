@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User\InvitationCode;
 use App\Services\InvitationService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class InvitationController extends Controller {
@@ -13,7 +14,7 @@ class InvitationController extends Controller {
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getIndex() {
+    public function getIndex(Request $request) {
         return view('admin.users.invitations', [
             'invitations' => InvitationCode::orderBy('id', 'DESC')->paginate(20),
         ]);

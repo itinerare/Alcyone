@@ -17,7 +17,7 @@
     {!! $notifications->render() !!}
 
     @foreach ($notifications->pluck('notification_type_id')->unique() as $type)
-        <div class="card mb-4">
+        <div class="card bg-dark-subtle mb-4">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <span class="float-end h5 mb-2">

@@ -9,7 +9,7 @@
 
     <h1>Settings</h1>
 
-    <div class="card mb-4">
+    <div class="card bg-body-secondary mb-4">
         <div class="card-body">
             <h3>Theme</h3>
 
@@ -17,7 +17,7 @@
             <div class="mb-3 row">
                 <label class="col-md-2 col-form-label">Theme</label>
                 <div class="col-md-10">
-                    {!! Form::select('theme', ['dark' => 'Dark', 'light' => 'Light'], Auth::user()->theme, ['class' => 'form-control']) !!}
+                    {!! Form::select('theme', ['dark' => 'Dark', 'light' => 'Light'], Auth::user()->theme, ['class' => 'form-select']) !!}
                 </div>
             </div>
             <div class="text-end">
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="card mb-4">
+    <div class="card bg-body-secondary mb-4">
         <div class="card-body">
             <h3>Email Address</h3>
 
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div class="card mb-4">
+    <div class="card bg-body-secondary mb-4">
         <div class="card-body">
             <h3>Change Password</h3>
 
@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <div class="card mb-4">
+    <div class="card bg-body-secondary mb-4">
         <div class="card-body">
             <h3>Two-Factor Authentication</h3>
 

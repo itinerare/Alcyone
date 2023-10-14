@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-primary px-sm-0 px-2" id="headerNav" data-bs-theme="light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url('/') }}" aria-label="To Home">
+        <a class="navbar-brand ms-md-3 ms-2" href="{{ url('/') }}" aria-label="To Home">
             {{ config('alcyone.settings.site_name', 'Alcyone') }}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -10,14 +10,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item dropdown">
-
-                </li>
-            </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-md-auto ms-2 me-md-3 me-0">
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">

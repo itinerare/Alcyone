@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-info px-sm-0 px-2" id="headerNav" data-bs-theme="light">
+<nav class="navbar navbar-expand-md bg-primary px-sm-0 px-2" id="headerNav" data-bs-theme="light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}" aria-label="To Home">
             {{ config('alcyone.settings.site_name', 'Alcyone') }}

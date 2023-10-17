@@ -27,7 +27,7 @@
                     'oldest' => 'Oldest First',
                 ],
                 Request::get('sort') ?: 'oldest',
-                ['class' => 'form-control'],
+                ['class' => 'form-select'],
             ) !!}
         </div>
         <div class="ms-2 mb-3">

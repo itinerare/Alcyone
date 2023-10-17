@@ -15,7 +15,7 @@
             {!! Form::text('name', Request::get('name'), ['class' => 'form-control']) !!}
         </div>
         <div class="me-2 mb-3">
-            {!! Form::select('rank_id', $ranks, Request::get('rank_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('rank_id', $ranks, Request::get('rank_id'), ['class' => 'form-select']) !!}
         </div>
         <div class="me-2 mb-3">
             {!! Form::select(
@@ -23,14 +23,12 @@
                 [
                     'alpha' => 'Sort Alphabetically (A-Z)',
                     'alpha-reverse' => 'Sort Alphabetically (Z-A)',
-                    'alias' => 'Sort by Alias (A-Z)',
-                    'alias-reverse' => 'Sort by Alias (Z-A)',
                     'rank' => 'Sort by Rank (Default)',
                     'newest' => 'Newest First',
                     'oldest' => 'Oldest First',
                 ],
                 Request::get('sort') ?: 'category',
-                ['class' => 'form-control'],
+                ['class' => 'form-select'],
             ) !!}
         </div>
         <div class="mb-3">

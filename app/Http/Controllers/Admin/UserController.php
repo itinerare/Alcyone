@@ -22,7 +22,7 @@ class UserController extends Controller {
 
         if ($request->get('name')) {
             $query->where(function ($query) use ($request) {
-                $query->where('users.name', 'LIKE', '%'.$request->get('name').'%')->orWhere('users.alias', 'LIKE', '%'.$request->get('name').'%');
+                $query->where('users.name', 'LIKE', '%'.$request->get('name').'%');
             });
         }
         if ($request->get('rank_id')) {
@@ -38,12 +38,6 @@ class UserController extends Controller {
                 break;
             case 'alpha-reverse':
                 $query->orderBy('name', 'DESC');
-                break;
-            case 'alias':
-                $query->orderBy('alias', 'ASC');
-                break;
-            case 'alias-reverse':
-                $query->orderBy('alias', 'DESC');
                 break;
             case 'rank':
                 $query->orderBy('ranks.sort', 'DESC')->orderBy('name');

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\InvitationController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RankController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController;
@@ -106,6 +107,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
                     Route::post('{name}/ban', 'postBan');
                     Route::get('{name}/unban-confirm', 'getUnbanConfirmation');
                     Route::post('{name}/unban', 'postUnban');
+                });
+
+                Route::controller(PageController::class)->prefix('pages')->group(function () {
+                    Route::get('/', 'getIndex');
+                    Route::get('edit/{id}', 'getEditPage');
+                    Route::post('edit/{id?}', 'postEditPage');
                 });
             });
         });

@@ -13,7 +13,8 @@
             @if(Auth::user()->isAdmin)
                 <a href="{{ url('admin/invitations') }}">Invitation Keys</a> ・
                 <a href="{{ url('admin/ranks') }}">Ranks</a> ・
-                <a href="{{ url('admin/users') }}">User Index</a><br />
+                <a href="{{ url('admin/users') }}">User Index</a> ・
+                <a href="{{ url('admin/pages') }}">Site Pages</a><br />
             @endif
         </h6>
     </div>

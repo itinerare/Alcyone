@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Notification extends Model {
@@ -40,7 +41,7 @@ class Notification extends Model {
      * Get the user who owns notification.
      */
     public function user() {
-        return $this->belongsTo('App\Models\User\User');
+        return $this->belongsTo(User::class);
     }
 
     /**********************************************************************************************

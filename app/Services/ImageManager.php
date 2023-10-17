@@ -72,7 +72,7 @@ class ImageManager extends Service {
             // First, remove the image files, including the cached PNG if it exists
             unlink($image->imagePath.'/'.$image->imageFileName);
             unlink($image->imagePath.'/'.$image->thumbnailFileName);
-            if(file_exists($image->convertedPath.'/'.$image->convertedFileName)) {
+            if (file_exists($image->convertedPath.'/'.$image->convertedFileName)) {
                 unlink($image->convertedPath.'/'.$image->convertedFileName);
             }
 

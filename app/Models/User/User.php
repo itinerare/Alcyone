@@ -107,7 +107,7 @@ class User extends Authenticatable implements MustVerifyEmail {
      * @return string
      */
     public function getDisplayNameAttribute() {
-        return ($this->is_banned ? '<strike>' : '').'<a href="'.$this->url.'" class="display-user">'.$this->name.'</a>'.($this->is_banned ? '</strike>' : '');
+        return ($this->is_banned ? '<strike>' : '').'<a href="'.$this->adminUrl.'" class="display-user">'.$this->name.'</a>'.($this->is_banned ? '</strike>' : '');
     }
 
     /**

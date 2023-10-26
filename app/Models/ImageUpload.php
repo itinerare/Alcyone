@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\User\User;
+
 class ImageUpload extends Model {
     /**
      * The attributes that are mass assignable.

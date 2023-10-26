@@ -9,16 +9,16 @@
             <div class="card-body ps-md-0">
                 <div class="mb-3">
                     {!! Form::label('web_url', 'For Web: (WebP)', ['class' => 'form-label']) !!}
-                    <div class="d-flex">
-                        {!! Form::text('web_url', $image->imageUrl, ['class' => 'form-control bg-body me-2', 'disabled']) !!}
-                        <i data-toggle="tooltip" title="Click to Copy" onclick="copyUrl($(this), '{{ $image->imageUrl }}');" class="far fa-copy fs-5 my-auto copy-url"></i>
+                    <div class="input-group">
+                        {!! Form::text('web_url', $image->imageUrl, ['class' => 'form-control bg-body', 'disabled']) !!}
+                        <span class="input-group-text"><i data-toggle="tooltip" title="Click to Copy" onclick="copyUrl($(this), '{{ $image->imageUrl }}');" class="far fa-copy fs-5 my-auto copy-url"></i></span>
                     </div>
                 </div>
                 <div class="mb-3">
                     {!! Form::label('share_url', 'For Sharing: (PNG)', ['class' => 'form-label']) !!}
-                    <div class="d-flex">
-                        {!! Form::text('share_url', url('images/converted/'.$image->slug), ['class' => 'form-control bg-body me-2', 'disabled']) !!}
-                        <i data-toggle="tooltip" title="Click to Copy" onclick="copyUrl($(this), '{{ url('images/converted/'.$image->slug) }}');" class="far fa-copy fs-5 my-auto"></i>
+                    <div class="input-group">
+                        {!! Form::text('share_url', url('images/converted/'.$image->slug), ['class' => 'form-control bg-body', 'disabled']) !!}
+                        <span class="input-group-text"><i data-toggle="tooltip" title="Click to Copy" onclick="copyUrl($(this), '{{ url('images/converted/'.$image->slug) }}');" class="far fa-copy fs-5 my-auto"></i></span>
                     </div>
                 </div>
                 <hr/>

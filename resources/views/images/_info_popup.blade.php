@@ -9,17 +9,11 @@
             <div class="card-body ps-md-0">
                 <div class="mb-3">
                     {!! Form::label('web_url', 'For Web: (WebP)', ['class' => 'form-label']) !!}
-                    <div class="input-group">
-                        {!! Form::text('web_url', $image->imageUrl, ['class' => 'form-control bg-body', 'disabled']) !!}
-                        <span class="input-group-text"><i data-toggle="tooltip" title="Click to Copy" onclick="copyUrl($(this), '{{ $image->imageUrl }}');" class="far fa-copy fs-5 my-auto copy-url"></i></span>
-                    </div>
+                    @include('widgets._url_display', ['url' => $image->imageUrl, 'urlName' => 'web_url', 'formClass' => 'bg-body'])
                 </div>
                 <div class="mb-3">
                     {!! Form::label('share_url', 'For Sharing: (PNG)', ['class' => 'form-label']) !!}
-                    <div class="input-group">
-                        {!! Form::text('share_url', url('images/converted/'.$image->slug), ['class' => 'form-control bg-body', 'disabled']) !!}
-                        <span class="input-group-text"><i data-toggle="tooltip" title="Click to Copy" onclick="copyUrl($(this), '{{ url('images/converted/'.$image->slug) }}');" class="far fa-copy fs-5 my-auto"></i></span>
-                    </div>
+                    @include('widgets._url_display', ['url' => url('images/converted/'.$image->slug), 'urlName' => 'share_url', 'formClass' => 'bg-body'])
                 </div>
                 <hr/>
                 Uploaded {!! $image->created_at->format('d F Y') !!}

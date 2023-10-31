@@ -91,11 +91,11 @@ class UserFactory extends Factory {
     }
 
     /**
-     * Indicate that the user is an editor.
+     * Indicate that the user is a moderator.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function editor() {
+    public function moderator() {
         return $this->state(function (array $attributes) {
             return [
                 'rank_id' => Rank::orderBy('sort', 'DESC')->skip(1)->first(),

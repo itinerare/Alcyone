@@ -36,7 +36,7 @@ class AccessTest extends TestCase {
         $response->assertStatus($status);
     }
 
-    static function accessProvider() {
+    public static function accessProvider() {
         return [
             'visitor' => [0, 302],
             'user'    => [1, 200],
@@ -66,26 +66,26 @@ class AccessTest extends TestCase {
         $response->assertStatus($status);
     }
 
-    static function memberAccessProvider() {
+    public static function memberAccessProvider() {
         return [
-            'visitor' => [0, 0, 302],
-            'user'    => [1, 0, 200],
-            'editor'  => [1, 1, 200],
-            'admin'   => [1, 2, 200],
+            'visitor'   => [0, 0, 302],
+            'user'      => [1, 0, 200],
+            'moderator' => [1, 1, 200],
+            'admin'     => [1, 2, 200],
         ];
     }
 
     /**
      * Test access to the admin dashboard.
-     * This should be representative of all editor routes.
+     * This should be representative of all moderator routes.
      *
-     * @dataProvider editorAccessProvider
+     * @dataProvider moderatorAccessProvider
      *
      * @param bool $user
      * @param int  $rank
      * @param int  $status
      */
-    public function testEditorRouteAccess($user, $rank, $status) {
+    public function testModeratorRouteAccess($user, $rank, $status) {
         if ($user) {
             $user = User::factory()->make([
                 'rank_id' => Rank::where('sort', $rank)->first()->id,
@@ -98,12 +98,12 @@ class AccessTest extends TestCase {
         $response->assertStatus($status);
     }
 
-    static function editorAccessProvider() {
+    public static function moderatorAccessProvider() {
         return [
-            'visitor' => [0, 0, 302],
-            'user'    => [1, 0, 302],
-            'editor'  => [1, 1, 200],
-            'admin'   => [1, 2, 200],
+            'visitor'   => [0, 0, 302],
+            'user'      => [1, 0, 302],
+            'moderator' => [1, 1, 200],
+            'admin'     => [1, 2, 200],
         ];
     }
 
@@ -130,12 +130,12 @@ class AccessTest extends TestCase {
         $response->assertStatus($status);
     }
 
-    static function adminAccessProvider() {
+    public static function adminAccessProvider() {
         return [
-            'visitor' => [0, 0, 302],
-            'user'    => [1, 0, 302],
-            'editor'  => [1, 1, 302],
-            'admin'   => [1, 2, 200],
+            'visitor'   => [0, 0, 302],
+            'user'      => [1, 0, 302],
+            'moderator' => [1, 1, 302],
+            'admin'     => [1, 2, 200],
         ];
     }
 }

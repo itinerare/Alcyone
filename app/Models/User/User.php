@@ -42,6 +42,26 @@ class User extends Authenticatable implements MustVerifyEmail {
         'banned_at'         => 'datetime',
     ];
 
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = [
+        'rank',
+    ];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'is_banned'            => 0,
+        'theme'                => 'dark',
+        'notifications_unread' => 0,
+    ];
+
     /**********************************************************************************************
 
         RELATIONS

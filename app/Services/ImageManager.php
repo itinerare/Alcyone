@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Facades\Notifications;
 use App\Models\ImageUpload;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
@@ -67,6 +68,13 @@ class ImageManager extends Service {
         try {
             if ($image->user_id != $user->id && !$user->isMod) {
                 throw new \Exception('Invalid image selected.');
+            }
+
+            // If the acting user is staff, send a notification to the image's uploader
+            if ($user->id != $image->user_id) {
+                Notifications::create('UPLOAD_REMOVED', $image->user, [
+                    'slug' => $image->slug,
+                ]);
             }
 
             // First, remove the image files, including the cached PNG if it exists

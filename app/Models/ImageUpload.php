@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Models\User\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ImageUpload extends Model {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *

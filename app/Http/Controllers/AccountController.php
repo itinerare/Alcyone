@@ -56,7 +56,7 @@ class AccountController extends Controller {
      */
     public function postTheme(Request $request) {
         $request->validate([
-            'theme' => 'required', Rule::in(['dark', 'light']),
+            'theme' => 'required|in:dark,light',
         ]);
         Auth::user()->update([
             'theme' => $request->get('theme'),

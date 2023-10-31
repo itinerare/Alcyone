@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Account:@yield('admin-title')
+    Admin:@yield('admin-title')
 @endsection
 
 @section('content')

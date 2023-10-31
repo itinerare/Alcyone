@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Report;
 
-class Report extends Model {
+use App\Models\Model;
+
+class Reporter extends Model {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'image_id', 'email', 'status',
+        'email', 'ip', 'is_banned',
     ];
 
     /**
@@ -17,7 +19,7 @@ class Report extends Model {
      *
      * @var string
      */
-    protected $table = 'reports';
+    protected $table = 'reporters';
 
     /**
      * Whether the model contains timestamps to be saved and updated.
@@ -28,20 +30,16 @@ class Report extends Model {
 
     /**********************************************************************************************
 
-        RELATIONS
+        ACCESSORS
 
     **********************************************************************************************/
 
     /**
-     * Get the image associated with the report.
+     * Displays the reporter's name.
+     *
+     * @return string
      */
-    public function image() {
-        return $this->hasOne(ImageUpload::class);
+    public function getDisplayNameAttribute() {
+        return ($this->is_banned ? '<strike>' : '').($this->email ?? 'Reporter #'.$this->id).($this->is_banned ? '</strike>' : '');
     }
-
-    /**********************************************************************************************
-
-        ACCESSORS
-
-    **********************************************************************************************/
 }

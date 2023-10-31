@@ -14,7 +14,10 @@
             <a class="nav-link {{ set_active('admin/reports/pending*') }} {{ set_active('admin/reports') }}" href="{{ url('admin/reports/pending') }}">Pending</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ set_active('admin/reports/processed*') }}" href="{{ url('admin/reports/processed') }}">Processed</a>
+            <a class="nav-link {{ set_active('admin/reports/accepted*') }}" href="{{ url('admin/reports/accepted') }}">Accepted</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ set_active('admin/reports/cancelled*') }}" href="{{ url('admin/reports/cancelled') }}">Cancelled</a>
         </li>
     </ul>
 
@@ -39,8 +42,8 @@
 
     <div class="row ms-md-2">
         <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-bottom">
-            <div class="col-12 col-md-2 font-weight-bold">Image</div>
-            <div class="col-6 col-md-3 font-weight-bold">Uploader</div>
+            <div class="col-12 col-md-3 font-weight-bold">Image</div>
+            <div class="col-6 col-md-2 font-weight-bold">Uploader</div>
             <div class="col-6 col-md-2 font-weight-bold">Reported By</div>
             <div class="col-6 col-md-2 font-weight-bold">Reported</div>
             <div class="col-6 col-md font-weight-bold">Status</div>
@@ -48,12 +51,12 @@
 
         @foreach ($reports as $report)
             <div class="d-flex row flex-wrap col-12 mt-1 pt-1 px-0 ubt-top">
-                <div class="col-12 col-md-2">{{ $report->key }}</div>
-                <div class="col-6 col-md-3">{!! $report->image->user->displayName !!}</div>
-                <div class="col-3 col-md-2">{!! $report->email ?? '<i>None</i>' !!}</div>
+                <div class="col-12 col-md-3">{{ $report->image->slug }}</div>
+                <div class="col-6 col-md-2">{!! $report->image->user->displayName !!}</div>
+                <div class="col-3 col-md-2">{!! $report->reporter->displayName !!}</div>
                 <div class="col-6 col-md-2">{!! pretty_date($report->created_at) !!}</div>
                 <div class="col-3 col-md">
-                    <span class="btn btn-{{ $report->status == 'Pending' ? 'warning' : 'secondary' }} btn-sm py-0 px-1">{{ $report->status }}</span>
+                    <span class="btn btn-{{ $report->status == 'Pending' ? 'primary' : ($report->status == 'Accepted' ? 'warning' : 'danger') }} btn-sm py-0 px-1">{{ $report->status }}</span>
                 </div>
                 <div class="col-3 col-md-1"><a href="{{ $report->adminUrl }}" class="btn btn-primary btn-sm py-0 px-1">Details</a></div>
             </div>

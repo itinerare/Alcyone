@@ -5,11 +5,13 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\InvitationController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RankController;
-use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Honeypot\ProtectAgainstSpam;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,16 +24,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(Controller::class)->group(function () {
-    Route::prefix('info')->group(function () {
-        Route::get('terms', 'getTerms');
-        Route::get('privacy', 'getPrivacyPolicy');
-    });
+Route::controller(Controller::class)->prefix('info')->group(function () {
+    Route::get('terms', 'getTerms');
+    Route::get('privacy', 'getPrivacyPolicy');
 });
 
 Route::controller(ImageController::class)->prefix('images')->group(function () {
     Route::get('converted/{slug}', 'getConvertedImage')
         ->whereAlphaNumeric('slug');
+});
+
+Route::controller(ReportController::class)->prefix('reports')->group(function () {
+    Route::get('new', 'getCreateReport');
+    Route::get('{key}', 'getReport')
+        ->whereAlphaNumeric('key');
+    Route::post('new', 'postCreateReport')
+        ->middleware(ProtectAgainstSpam::class);
 });
 
 /* Routes that require login */
@@ -76,9 +84,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
                 Route::get('/', 'getIndex');
             });
 
-            Route::controller(ReportController::class)->prefix('reports')->group(function () {
+            Route::controller(AdminReportController::class)->prefix('reports')->group(function () {
                 Route::get('/', 'getReportIndex');
-                Route::get('/{status}', 'getReportIndex')->where('status', 'pending|processed');
+                Route::get('{status}', 'getReportIndex')
+                    ->where('status', 'pending|accepted|cancelled');
+                Route::get('{id}', 'getReport')
+                    ->whereNumber('id');
+                Route::post('{id}/{action}', 'postReport')
+                    ->whereNumber('id')->where('action', 'accept|cancel|ban');
             });
 
             /* Routes that require admin permissions */

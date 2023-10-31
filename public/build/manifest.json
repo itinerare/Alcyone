@@ -1,6 +1,6 @@
 {
   "resources/css/app.scss": {
-    "file": "assets/app-fcfaa64b.css",
+    "file": "assets/app-6b2035f3.css",
     "isEntry": true,
     "src": "resources/css/app.scss"
   },
@@ -12,8 +12,24 @@
     "file": "assets/RobotoCondensed-Regular-6a2cfb7e.ttf",
     "src": "resources/fonts/RobotoCondensed-Regular.ttf"
   },
+  "resources/images/close.png": {
+    "file": "assets/close-5d62e6c9.png",
+    "src": "resources/images/close.png"
+  },
+  "resources/images/loading.gif": {
+    "file": "assets/loading-225aa88b.gif",
+    "src": "resources/images/loading.gif"
+  },
+  "resources/images/next.png": {
+    "file": "assets/next-15b869b0.png",
+    "src": "resources/images/next.png"
+  },
+  "resources/images/prev.png": {
+    "file": "assets/prev-7fd9273f.png",
+    "src": "resources/images/prev.png"
+  },
   "resources/js/app.js": {
-    "file": "assets/app-c8ca4c78.js",
+    "file": "assets/app-2956efd7.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

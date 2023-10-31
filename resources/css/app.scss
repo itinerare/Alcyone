@@ -7,20 +7,8 @@
 // Magnific Popup
 @import '../node_modules/magnific-popup/src/css/main';
 
-/**************************************************************************************************
-
-    Fonts
-
-**************************************************************************************************/
-
-@font-face {
-    font-family: Roboto Condensed;
-    src: url(../fonts/RobotoCondensed-Regular.ttf)
-}
-@font-face {
-    font-family: Lato;
-    src: url(../fonts/Lato-Regular.ttf)
-}
+// Lightbox
+@import '../node_modules/lightbox2/dist/css/lightbox';
 
 /**************************************************************************************************
 
@@ -47,7 +35,7 @@ a:hover {
 
 body {
     background-color: transparent;
-    font-family: Lato, sans-serif;
+    font-family: $font-family-sans-serif;
     min-height: 100vh;
     font-size: 80%;
 }
@@ -224,8 +212,31 @@ a {-webkit-transition: all .3s ease-in-out; -o-transition: all .3s ease-in-out; 
     animation-duration: 1s;
 }
 
-.mfp-close {
+.mfp-close, .lb-close {
     color: $cyan !important;
+}
+
+.reported-image {
+    filter: blur(1rem);
+    -webkit-transition: all .3s ease-in-out; -o-transition: all .3s ease-in-out; transition: all .3s ease-in-out;
+}
+
+.reported-image:hover {
+    filter: blur(0);
+}
+
+[data-bs-theme=light] {
+    .lb-image {
+        border-color: $body-secondary-bg !important;
+        background-color: $body-secondary-bg;
+    }
+}
+
+[data-bs-theme=dark] {
+    .lb-image {
+        border-color: $body-secondary-bg-dark !important;
+        background-color: $body-secondary-bg-dark;
+    }
 }
 
 /**************************************************************************************************

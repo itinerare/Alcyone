@@ -9,6 +9,8 @@ import * as magnific from 'magnific-popup';
 import * as bootstrap from 'bootstrap';
 window.bootstrap = bootstrap;
 
+import * as lightbox from 'lightbox2';
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

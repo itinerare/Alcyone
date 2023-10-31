@@ -1,5 +1,14 @@
+@font-face {
+    font-family: Roboto Condensed;
+    src: url(../fonts/RobotoCondensed-Regular.ttf)
+}
+@font-face {
+    font-family: Lato;
+    src: url(../fonts/Lato-Regular.ttf)
+}
+
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family-sans-serif: Lato, sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
@@ -9,7 +18,7 @@ $purple: #9561e2;
 $pink: #f66d9b;
 $red: #e3342f;
 $orange: #f6993f;
-$yellow: #ffed4a;
+$yellow: #ffcf4a;
 $teal: #4dc0b5;
 $cyan: #748fa5;
 $blue: #6cb2eb;

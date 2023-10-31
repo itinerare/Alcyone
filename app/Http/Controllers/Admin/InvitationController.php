@@ -16,7 +16,7 @@ class InvitationController extends Controller {
      */
     public function getIndex(Request $request) {
         return view('admin.users.invitations', [
-            'invitations' => InvitationCode::orderBy('id', 'DESC')->paginate(20)->appends($request->query()),
+            'invitations' => InvitationCode::with('user', 'recipient')->orderBy('id', 'DESC')->paginate(20)->appends($request->query()),
         ]);
     }
 

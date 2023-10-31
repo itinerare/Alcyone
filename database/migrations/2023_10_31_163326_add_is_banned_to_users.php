@@ -12,6 +12,8 @@ return new class extends Migration {
         Schema::table('users', function (Blueprint $table) {
             //
             $table->boolean('is_banned')->default(0);
+            $table->text('ban_reason')->nullable()->default(null);
+            $table->dateTime('banned_at')->nullable()->default(null);
         });
     }
 
@@ -22,6 +24,8 @@ return new class extends Migration {
         Schema::table('users', function (Blueprint $table) {
             //
             $table->dropColumn('is_banned');
+            $table->dropColumn('ban_reason');
+            $table->dropColumn('banned_at');
         });
     }
 };

@@ -28,7 +28,7 @@ class ImageController extends Controller {
      */
     public function getImage($slug) {
         $image = ImageUpload::get()->where('slug', $slug)->first();
-        if (!$image || (Auth::user()->id != $image->user_id && !Auth::user()->isMod)) {
+        if (!$image || (Auth::user()->id != $image->user_id)) {
             abort(404);
         }
 
@@ -104,7 +104,7 @@ class ImageController extends Controller {
      */
     public function postDeleteImage(Request $request, $slug, ImageManager $service) {
         $image = ImageUpload::get()->where('slug', $slug)->first();
-        if (!$image) {
+        if (!$image || (Auth::user()->id != $image->user_id)) {
             abort(404);
         }
 

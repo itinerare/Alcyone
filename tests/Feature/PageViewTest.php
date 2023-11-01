@@ -28,7 +28,7 @@ class PageViewTest extends TestCase {
      */
     public function testGetPage($page, $setup, $user, $status) {
         if ($setup) {
-            $this->artisan('add-site-pages');
+            $this->artisan('app:add-site-pages');
         }
 
         $response = $this;

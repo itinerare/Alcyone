@@ -18,7 +18,7 @@ class AdminSitePageTest extends TestCase {
     protected function setUp(): void {
         parent::setUp();
 
-        $this->artisan('add-site-pages');
+        $this->artisan('app:add-site-pages');
         $this->user = User::factory()->admin()->make();
     }
 

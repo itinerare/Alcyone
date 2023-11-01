@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Facades\Notifications;
 use App\Models\ImageUpload;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class ImageManager extends Service {
@@ -93,5 +95,34 @@ class ImageManager extends Service {
         }
 
         return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Generates and saves test images for page image test purposes.
+     *
+     * @param \App\Models\ImageUpload $image
+     * @param bool                    $create
+     *
+     * @return bool
+     */
+    public function testImages($image, $create = true) {
+        if ($create) {
+            // Generate the fake files to save
+            $file['image'] = UploadedFile::fake()->image('test_image.png');
+            $file['thumbnail'] = UploadedFile::fake()->image('test_thumb.png');
+
+            // Save the files in line with usual image handling.
+            $this->handleImage($file['image'], $image->imagePath, $image->imageFileName);
+            $this->handleImage($file['thumbnail'], $image->imagePath, $image->thumbnailFileName);
+        } elseif (!$create && File::exists($image->imagePath.'/'.$image->thumbnailFileName)) {
+            // Remove test files
+            unlink($image->imagePath.'/'.$image->thumbnailFileName);
+            unlink($image->imagePath.'/'.$image->imageFileName);
+            if (file_exists($image->convertedPath.'/'.$image->convertedFileName)) {
+                unlink($image->convertedPath.'/'.$image->convertedFileName);
+            }
+        }
+
+        return true;
     }
 }

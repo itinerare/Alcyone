@@ -114,6 +114,12 @@ class ImageUploadTest extends TestCase {
 
         $response->assertStatus($status);
 
+        if ($status == 200) {
+            // Check to see if the web/share URLs are displayed
+            $response->assertSee($image->imageUrl);
+            $response->assertSee(url('images/converted/'.$image->slug));
+        }
+
         if ($isValid) {
             $this->service->testImages($image, false);
         }

@@ -5,8 +5,11 @@ namespace App\Models\Report;
 use App\Models\ImageUpload;
 use App\Models\Model;
 use App\Models\User\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Report extends Model {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *

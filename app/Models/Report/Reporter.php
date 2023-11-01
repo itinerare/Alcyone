@@ -3,8 +3,11 @@
 namespace App\Models\Report;
 
 use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reporter extends Model {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *

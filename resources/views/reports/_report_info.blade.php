@@ -1,5 +1,5 @@
 <div class="row mb-4">
-    @if($report->status != 'Accepted')
+    @if(!$report->image->deleted_at)
         <div class="col-md-4 col-xxl-3">
             <div class="container">
                 <div class="content align-self-center bg-dark-subtle rounded" style="min-height:100px;">

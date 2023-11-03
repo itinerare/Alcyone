@@ -92,6 +92,10 @@ class ReportManager extends Service {
         DB::beginTransaction();
 
         try {
+            if ($report->status != 'Pending') {
+                throw new \Exception('This report has already been processed.');
+            }
+
             // Process the report
             $report->update([
                 'status'         => 'Accepted',
@@ -130,6 +134,10 @@ class ReportManager extends Service {
         DB::beginTransaction();
 
         try {
+            if ($report->status != 'Pending') {
+                throw new \Exception('This report has already been processed.');
+            }
+
             // Process the report, and take no other action
             $report->update([
                 'status'         => 'Cancelled',
@@ -163,6 +171,10 @@ class ReportManager extends Service {
         DB::beginTransaction();
 
         try {
+            if ($report->status != 'Pending') {
+                throw new \Exception('This report has already been processed.');
+            }
+
             // Process the report, and take no other action
             $report->update([
                 'status'         => 'Cancelled',

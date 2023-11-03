@@ -298,7 +298,7 @@ class ImageUploadTest extends TestCase {
                 $this->assertFileDoesNotExist($image->imagePath.'/'.$image->thumbnailFileName);
             }
         } elseif ($isValid) {
-            $this->assertModelExists($image);
+            $this->assertNotSoftDeleted($image);
             $this->assertFileExists($image->imagePath.'/'.$image->imageFileName);
             $this->assertFileExists($image->imagePath.'/'.$image->thumbnailFileName);
 

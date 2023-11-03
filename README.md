@@ -24,6 +24,7 @@ Alcyone is a lightweight small-scale/private image hosting application. It suppo
 - A lightweight admin/moderator panel
     - Moderators may access the index and reports queue
     - Admins have access to all functions
+- Backup handling including optional Dropbox support
 
 ## Setup
 

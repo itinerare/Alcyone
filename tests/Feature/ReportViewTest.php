@@ -51,7 +51,7 @@ class ReportViewTest extends TestCase {
     }
 
     /**
-     * Test getting the create report page.
+     * Test getting the report page.
      *
      * @dataProvider getReportProvider
      *

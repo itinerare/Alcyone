@@ -33,13 +33,12 @@
     <meta property="twitter:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('alcyone.settings.site_desc', 'An Alcyone site') }} @endif">
 
     <!-- Scripts & Styles -->
-    @vite(['resources/css/app.scss', 'resources/js/app.js'])
-
-    <!-- Scripts -->
     <script defer src="{{ asset('js/site.js') }}"></script>
     @if (View::hasSection('head-scripts'))
         @yield('head-scripts')
     @endif
+
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
 
     {{-- Font Awesome --}}
     <link defer href="{{ asset('css/all.min.css') }}" rel="stylesheet">

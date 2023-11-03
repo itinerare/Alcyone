@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\ImageUpload;
+use App\Models\Report\Report;
 use App\Models\User\Rank;
 use App\Models\User\User;
 use App\Services\ImageManager;
@@ -266,13 +267,18 @@ class ImageUploadTest extends TestCase {
      *
      * @param array $userData
      * @param bool  $isValid
+     * @param bool  $withReport
      * @param bool  $expected
      */
-    public function testPostDeleteImage($userData, $isValid, $expected) {
+    public function testPostDeleteImage($userData, $isValid, $withReport, $expected) {
         if ($isValid) {
             // Create an image and test files
             $image = ImageUpload::factory()->user($this->user->id)->create();
             $this->service->testImages($image);
+        }
+
+        if ($withReport) {
+            $report = Report::factory()->image($image->id)->create();
         }
 
         $rankId = Rank::where('sort', $userData[1] ? 1 : 0)->first()->id;
@@ -297,12 +303,27 @@ class ImageUploadTest extends TestCase {
                 $this->assertFileDoesNotExist($image->imagePath.'/'.$image->imageFileName);
                 $this->assertFileDoesNotExist($image->imagePath.'/'.$image->thumbnailFileName);
             }
+
+            if ($withReport) {
+                $this->assertDatabaseHas('reports', [
+                    'id'             => $report->id,
+                    'status'         => 'Cancelled',
+                    'staff_comments' => '<p>Automatically cancelled due to image deletion.</p>',
+                ]);
+            }
         } elseif ($isValid) {
             $this->assertNotSoftDeleted($image);
             $this->assertFileExists($image->imagePath.'/'.$image->imageFileName);
             $this->assertFileExists($image->imagePath.'/'.$image->thumbnailFileName);
 
             $this->service->testImages($image, false);
+
+            if ($withReport) {
+                $this->assertDatabaseHas('reports', [
+                    'id'             => $report->id,
+                    'status'         => 'Pending',
+                ]);
+            }
         } else {
             $response->assertStatus(404);
         }
@@ -312,12 +333,15 @@ class ImageUploadTest extends TestCase {
         return [
             // $userData = [$isUploader, $isMod]
 
-            'valid image, uploader'     => [[1, 0], 1, 1],
-            'valid image, other user'   => [[0, 0], 1, 0],
-            'valid image, moderator'    => [[0, 1], 1, 0],
-            'invalid image, uploader'   => [[1, 0], 0, 0],
-            'invalid image, other user' => [[0, 0], 0, 0],
-            'invalid image, moderator'  => [[0, 1], 0, 0],
+            'valid image, uploader'                => [[1, 0], 1, 0, 1],
+            'valid image, uploader, with report'   => [[1, 0], 1, 1, 1],
+            'valid image, other user'              => [[0, 0], 1, 0, 0],
+            'valid image, other user, with report' => [[0, 0], 1, 1, 0],
+            'valid image, moderator'               => [[0, 1], 1, 0, 0],
+            'valid image, moderator, with report'  => [[0, 1], 1, 1, 0],
+            'invalid image, uploader'              => [[1, 0], 0, 0, 0],
+            'invalid image, other user'            => [[0, 0], 0, 0, 0],
+            'invalid image, moderator'             => [[0, 1], 0, 0, 0],
         ];
     }
 }

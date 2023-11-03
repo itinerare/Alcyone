@@ -6,6 +6,7 @@ use App\Models\ImageUpload;
 use App\Models\Report\Report;
 use App\Models\User\User;
 use App\Services\ImageManager;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -56,15 +57,22 @@ class ReportViewTest extends TestCase {
      *
      * @param bool $user
      * @param bool $isValid
+     * @param bool $isProcessed
+     * @param bool $deletedImage
      * @param int  $status
      */
-    public function testGetReport($user, $isValid, $status) {
+    public function testGetReport($user, $isValid, $isProcessed, $deletedImage, $status) {
         if ($isValid) {
             // Generate an image to report
-            $image = ImageUpload::factory()->user($this->user->id)->create();
+            $image = ImageUpload::factory()->user($this->user->id)->create([
+                'deleted_at' => $deletedImage ? Carbon::now() : null,
+            ]);
             $this->service->testImages($image);
 
-            $report = Report::factory()->image($image->id)->create();
+            $report = Report::factory()->image($image->id)->create($isProcessed ? [
+                'status'   => ($deletedImage ? 'Accepted' : 'Cancelled'),
+                'staff_id' => $this->user->id,
+            ] : []);
         }
 
         if ($user) {
@@ -81,8 +89,18 @@ class ReportViewTest extends TestCase {
         $response->assertStatus($status);
 
         if ($status == 200) {
-            $response->assertSee($image->url);
+            if (!$deletedImage) {
+                $response->assertSee($image->url);
+            } else {
+                $response->assertDontSee($image->url);
+            }
             $response->assertSee($report->reason);
+
+            if ($isProcessed) {
+                $response->assertSeeText($deletedImage ? 'Accepted' : 'Cancelled');
+            } else {
+                $response->assertSeeText('Pending');
+            }
         }
 
         if ($isValid) {
@@ -92,10 +110,14 @@ class ReportViewTest extends TestCase {
 
     public static function getReportProvider() {
         return [
-            'visitor, valid'   => [0, 1, 200],
-            'visitor, invalid' => [0, 0, 404],
-            'user, valid'      => [1, 1, 200],
-            'user, invalid'    => [1, 0, 404],
+            'visitor, pending, valid'   => [0, 1, 0, 0, 200],
+            'visitor, cancelled, valid' => [0, 1, 1, 0, 200],
+            'visitor, accepted, valid'  => [0, 1, 1, 1, 200],
+            'visitor, pending, invalid' => [0, 0, 0, 0, 404],
+            'user, pending, valid'      => [1, 1, 0, 0, 200],
+            'user, cancelled, valid'    => [1, 1, 1, 0, 200],
+            'user, accepted, valid'     => [1, 1, 1, 1, 200],
+            'user, pending, invalid'    => [1, 0, 0, 0, 404],
         ];
     }
 

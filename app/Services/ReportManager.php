@@ -99,8 +99,10 @@ class ReportManager extends Service {
                 'staff_comments' => $data['staff_comments'] ?? null,
             ]);
 
-            // Delete the offending image
-            (new ImageManager)->deleteImage($report->image, $user);
+            if (!$report->image->is_deleted) {
+                // Delete the offending image
+                (new ImageManager)->deleteImage($report->image, $user, true);
+            }
 
             // If the reporter has an email address on file, send a notification email
             if (isset($report->reporter->email)) {

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Facades\Notifications;
 use App\Models\ImageUpload;
+use App\Models\Report\Report;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -61,10 +62,11 @@ class ImageManager extends Service {
      *
      * @param \App\Models\ImageUpload $image
      * @param \App\Models\User\User   $user
+     * @param bool                    $reportAction
      *
      * @return bool
      */
-    public function deleteImage($image, $user) {
+    public function deleteImage($image, $user, $reportAction = false) {
         DB::beginTransaction();
 
         try {
@@ -84,6 +86,15 @@ class ImageManager extends Service {
             unlink($image->imagePath.'/'.$image->thumbnailFileName);
             if (file_exists($image->convertedPath.'/'.$image->convertedFileName)) {
                 unlink($image->convertedPath.'/'.$image->convertedFileName);
+            }
+
+            // If reports with this image exist, and it is not being deleted due to them,
+            // cancel the relevant report(s)
+            if ($reportAction && Report::where('image_upload_id', $image->id)->exists()) {
+                Report::where('image_upload_id', $image->id)->update([
+                    'status'         => 'Cancelled',
+                    'staff_comments' => '<p>Automatically cancelled due to image deletion.</p>',
+                ]);
             }
 
             // Then, delete the image object itself

@@ -10,7 +10,7 @@
         <h6>
             <a href="{{ url('admin') }}">Admin Home</a> ・
             <a href="{{ url('admin/reports') }}">Reports Queue</a><br />
-            @if(Auth::user()->isAdmin)
+            @if (Auth::user()->isAdmin)
                 <a href="{{ url('admin/invitations') }}">Invitation Keys</a> ・
                 <a href="{{ url('admin/ranks') }}">Ranks</a> ・
                 <a href="{{ url('admin/users') }}">User Index</a> ・

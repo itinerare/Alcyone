@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title') Report {{ $report->key }} @endsection
+@section('title')
+    Report {{ $report->key }}
+@endsection
 
 @section('content')
     <h1>
@@ -10,27 +12,31 @@
             {{ $report->status == 'Accepted' ? 'bg-warning' : '' }}
             {{ $report->status == 'Cancelled' ? 'bg-danger' : '' }}
         ">
-                {{ $report->status }}
+            {{ $report->status }}
         </div>
     </h1>
 
     @include('reports._report_info')
 
     <p>
-        This is the record of your report. You can return to this page at any time to view the current state of the report and any staff comments. Please save this URL if you wish to view the report's status at a later date, especially if you have not provided an email address for later notification.
+        This is the record of your report. You can return to this page at any time to view the current state of the report and any staff comments. Please save this URL if you wish to view the report's status at a later date, especially if you have not
+        provided an email address for later notification.
     </p>
 
     <p>
         @switch($report->status)
             @case('Accepted')
                 This report has been accepted and the reported image removed.
-                @break
+            @break
+
             @case('Cancelled')
                 The report was reviewed and the reported image found not to violate the <a href="{{ url('info/terms') }}">Terms of Service.</a>
-                @break
+            @break
+
             @case('Pending')
                 This report is pending review by staff.
-                @break
+            @break
+
             @default
         @endswitch
     </p>

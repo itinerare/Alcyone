@@ -1,9 +1,11 @@
 @extends('admin.layout')
 
-@section('admin-title') Report #{{ $report->id }} @endsection
+@section('admin-title')
+    Report #{{ $report->id }}
+@endsection
 
 @section('admin-content')
-    {!! breadcrumbs(['Admin Panel' => 'admin', 'Report Queue' => 'admin/reports/pending', 'Report #'.$report->id => $report->adminUrl]) !!}
+    {!! breadcrumbs(['Admin Panel' => 'admin', 'Report Queue' => 'admin/reports/pending', 'Report #' . $report->id => $report->adminUrl]) !!}
 
     <h1>
         Report #{{ $report->id }}
@@ -12,13 +14,13 @@
             {{ $report->status == 'Accepted' ? 'bg-warning' : '' }}
             {{ $report->status == 'Cancelled' ? 'bg-danger' : '' }}
         ">
-                {{ $report->status }}
+            {{ $report->status }}
         </div>
     </h1>
 
     @include('reports._report_info', ['isAdmin' => true])
 
-    @if($report->status == 'Pending')
+    @if ($report->status == 'Pending')
         {!! Form::open(['url' => url()->current(), 'id' => 'reportForm']) !!}
 
         <div class="mb-3">
@@ -49,7 +51,7 @@
         </div>
     @endif
 
-    @if($report->status == 'Pending')
+    @if ($report->status == 'Pending')
         <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <!-- Accept -->

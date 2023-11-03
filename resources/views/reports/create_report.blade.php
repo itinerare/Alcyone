@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
-@section('title') New Report @endsection
+@section('title')
+    New Report
+@endsection
 
 @section('content')
     <h1>New Report</h1>
     <p>
-        If you've encountered an image hosted by this Alycone instance that violates its <a href="{{ url('info/terms') }}">Terms of Service</a>, you may report that image here. You may also (optionally) provide a contact email address if you wish to be notified of actions relating to your report. Reports are limited to one image per; if there are multiple offending images, please report each one individually. Thank you for understanding.
+        If you've encountered an image hosted by this Alycone instance that violates its <a href="{{ url('info/terms') }}">Terms of Service</a>, you may report that image here. You may also (optionally) provide a contact email address if you wish to be
+        notified of actions relating to your report. Reports are limited to one image per; if there are multiple offending images, please report each one individually. Thank you for understanding.
     </p>
     {!! Form::open(['url' => 'reports/new', 'action' => 'reports/new']) !!}
 

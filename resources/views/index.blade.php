@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title') Home @endsection
+@section('title')
+    Home
+@endsection
 
 @section('content')
     <div class="row">
@@ -8,7 +10,7 @@
             <div class="card bg-body-secondary mb-4">
                 <div class="card-body">
                     <h5>Upload an Image</h5>
-                    {!! Form::open([ 'url' => 'images/upload', 'id' => 'imageForm', 'files' => true,]) !!}
+                    {!! Form::open(['url' => 'images/upload', 'id' => 'imageForm', 'files' => true]) !!}
 
                     <div class="card bg-body-tertiary mb-2 d-none" id="imageContainer">
                         <div class="card-body text-center">
@@ -18,9 +20,9 @@
 
                     <div class="p-2">
                         {!! Form::label('mainImage', 'Upload File') !!}
-                        {!! Form::file('image', ['id' => 'mainImage']) !!}<br/>
+                        {!! Form::file('image', ['id' => 'mainImage']) !!}<br />
                         <small>Images may be PNG, GIF, JPEG, or WebP and up to
-                            {{ min((int)ini_get('upload_max_filesize'), (int)ini_get('post_max_size'), '17') }}MB in size.</small>
+                            {{ min((int) ini_get('upload_max_filesize'), (int) ini_get('post_max_size'), '17') }}MB in size.</small>
                     </div>
 
                     <div class="text-end">

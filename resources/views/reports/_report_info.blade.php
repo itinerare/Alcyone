@@ -1,15 +1,12 @@
 <div class="row mb-4">
-    @if(!$report->image->deleted_at)
+    @if (!$report->image->deleted_at)
         <div class="col-md-4 col-xxl-3">
             <div class="container">
                 <div class="content align-self-center bg-dark-subtle rounded" style="min-height:100px;">
-                    <a class="align-self-center image-link" data-lightbox="entry" data-title="{{ 'Reported Image '.$report->image->slug }}" href="{{ $report->image->imageUrl }}">
+                    <a class="align-self-center image-link" data-lightbox="entry" data-title="{{ 'Reported Image ' . $report->image->slug }}" href="{{ $report->image->imageUrl }}">
                         <div class="content-overlay"></div>
                         <div class="text-center align-self-center my-auto">
-                            <img src="{{ $report->image->thumbnailUrl }}"
-                                class="p-2 reported-image"
-                                style="width: auto; height: {{ config('alcyone.settings.thumbnail_height') }}px"
-                                alt="Uploaded image thumbnail" />
+                            <img src="{{ $report->image->thumbnailUrl }}" class="p-2 reported-image" style="width: auto; height: {{ config('alcyone.settings.thumbnail_height') }}px" alt="Uploaded image thumbnail" />
                         </div>
                     </a>
                 </div>
@@ -26,7 +23,7 @@
                 {{ $report->image->slug }}
             </div>
         </div>
-        @if(isset($isAdmin) && $isAdmin)
+        @if (isset($isAdmin) && $isAdmin)
             <div class="row">
                 <div class="col-md-4">
                     <h5>Uploaded By</h5>
@@ -52,7 +49,7 @@
                 {{ $report->reason }}
             </div>
         </div>
-        @if(isset($isAdmin) && $isAdmin)
+        @if (isset($isAdmin) && $isAdmin)
             <div class="row">
                 <div class="col-md-4">
                     <h5>Processed By</h5>

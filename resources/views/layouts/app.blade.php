@@ -12,31 +12,25 @@
 
     <!-- Primary Meta Tags -->
     <meta name="title" content="{{ config('alcyone.settings.site_name', 'Alcyone') }} -@yield('title')">
-    <meta name="description"
-        content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('alcyone.settings.site_desc', 'An Alcyone site') }} @endif">
+    <meta name="description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('alcyone.settings.site_desc', 'An Alcyone site') }} @endif">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ config('app.url', 'http://localhost') }}">
     @if (View::hasSection('meta-img'))
-        <meta property="og:image"
-            content="@yield('meta-img')">
+        <meta property="og:image" content="@yield('meta-img')">
     @endif
     <meta property="og:title" content="{{ config('alcyone.settings.site_name', 'Alcyone') }} -@yield('title')">
-    <meta property="og:description"
-        content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('alcyone.settings.site_desc', 'An Alcyone site') }} @endif">
+    <meta property="og:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('alcyone.settings.site_desc', 'An Alcyone site') }} @endif">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ config('app.url', 'http://localhost') }}">
     @if (View::hasSection('meta-img'))
-        <meta property="twitter:image"
-            content="@yield('meta-img')">
+        <meta property="twitter:image" content="@yield('meta-img')">
     @endif
-    <meta property="twitter:title"
-        content="{{ config('alcyone.settings.site_name', 'Alcyone') }} -@yield('title')">
-    <meta property="twitter:description"
-        content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('alcyone.settings.site_desc', 'An Alcyone site') }} @endif">
+    <meta property="twitter:title" content="{{ config('alcyone.settings.site_name', 'Alcyone') }} -@yield('title')">
+    <meta property="twitter:description" content="@if (View::hasSection('meta-desc')) @yield('meta-desc') @else {{ config('alcyone.settings.site_desc', 'An Alcyone site') }} @endif">
 
     <!-- Scripts & Styles -->
     @vite(['resources/css/app.scss', 'resources/js/app.js'])

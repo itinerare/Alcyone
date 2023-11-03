@@ -19,8 +19,7 @@
         <li><strong>Member</strong>/Rank 3: Can view all regular site information even when the site is set to be private
             (visitors cannot view).</li>
     </ul>
-    <p>Users are given the basic/member rank by default. To assign a rank to a user, find their admin page from the <a
-            href="{{ url('admin/users') }}">User Index</a> and change their rank there.</p>
+    <p>Users are given the basic/member rank by default. To assign a rank to a user, find their admin page from the <a href="{{ url('admin/users') }}">User Index</a> and change their rank there.</p>
 
     <table class="table table-sm ranks-table">
         <thead>

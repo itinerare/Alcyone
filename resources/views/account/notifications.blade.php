@@ -28,12 +28,9 @@
                         {!! Form::submit('x clear', ['class' => 'badge btn-primary', 'style' => 'display:inline; border: 0;']) !!}
                         {!! Form::close() !!}
                     </span>
-                    <a class="card-title h5 collapse-title mb-2"
-                        href="#{{ str_replace(' ', '_', config('mundialis.notifications.' . $type . '.name')) }}"
-                        data-bs-toggle="collapse">{{ config('mundialis.notifications.' . $type . '.name') }}
+                    <a class="card-title h5 collapse-title mb-2" href="#{{ str_replace(' ', '_', config('mundialis.notifications.' . $type . '.name')) }}" data-bs-toggle="collapse">{{ config('mundialis.notifications.' . $type . '.name') }}
                     </a>
-                    <div id="{{ str_replace(' ', '_', config('mundialis.notifications.' . $type . '.name')) }}"
-                        class="collapse {{ $notifications->where('notification_type_id', $type)->count() < 5 ? 'show' : '' }} mt-2">
+                    <div id="{{ str_replace(' ', '_', config('mundialis.notifications.' . $type . '.name')) }}" class="collapse {{ $notifications->where('notification_type_id', $type)->count() < 5 ? 'show' : '' }} mt-2">
                         <table class="table notifications-table">
                             <thead>
                                 <tr>
@@ -47,9 +44,7 @@
                                     <tr class="{{ $notification->is_unread ? 'unread' : '' }}">
                                         <td>{!! $notification->message !!}</td>
                                         <td>{!! format_date($notification->created_at) !!}</td>
-                                        <td class="text-end"><a href="#" data-id="{{ $notification->id }}"
-                                                class="clear-notification"><i class="fas fa-times"
-                                                    aria-hidden="true"></i></a></td>
+                                        <td class="text-end"><a href="#" data-id="{{ $notification->id }}" class="clear-notification"><i class="fas fa-times" aria-hidden="true"></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

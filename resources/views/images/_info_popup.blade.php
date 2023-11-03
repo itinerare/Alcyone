@@ -13,14 +13,14 @@
                 </div>
                 <div class="mb-3">
                     {!! Form::label('share_url', 'For Sharing: (PNG)', ['class' => 'form-label']) !!}
-                    @include('widgets._url_display', ['url' => url('images/converted/'.$image->slug), 'urlName' => 'share_url', 'formClass' => 'bg-body'])
+                    @include('widgets._url_display', ['url' => url('images/converted/' . $image->slug), 'urlName' => 'share_url', 'formClass' => 'bg-body'])
                 </div>
-                <hr/>
+                <hr />
                 Uploaded {!! $image->created_at->format('d F Y') !!}
                 <div id="deleteImage" class="d-none mt-3">
                     {!! Form::open(['url' => 'images/delete/' . $image->slug]) !!}
 
-                    You are about to delete this image. This is not reversible.<br/>
+                    You are about to delete this image. This is not reversible.<br />
                     Are you sure you want to delete this image?
 
                     <div class="text-end mt-2">

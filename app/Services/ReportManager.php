@@ -103,7 +103,7 @@ class ReportManager extends Service {
                 'staff_comments' => $data['staff_comments'] ?? null,
             ]);
 
-            if (!$report->image->is_deleted) {
+            if (!$report->image->deleted_at) {
                 // Delete the offending image
                 (new ImageManager)->deleteImage($report->image, $user, true);
             }

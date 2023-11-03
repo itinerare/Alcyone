@@ -2,7 +2,9 @@
     "name": "itinerare/alcyone",
     "type": "project",
     "description": "A framework for simple private image hosting.",
-    "keywords": ["image hosting"],
+    "keywords": [
+        "image hosting"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.1",
@@ -85,5 +87,6 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "version": "1.0.0"
 }

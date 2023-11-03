@@ -90,7 +90,7 @@ class ImageManager extends Service {
 
             // If reports with this image exist, and it is not being deleted due to them,
             // cancel the relevant report(s)
-            if ($reportAction && Report::where('image_upload_id', $image->id)->exists()) {
+            if (!$reportAction && Report::where('image_upload_id', $image->id)->exists()) {
                 Report::where('image_upload_id', $image->id)->update([
                     'status'         => 'Cancelled',
                     'staff_comments' => '<p>Automatically cancelled due to image deletion.</p>',

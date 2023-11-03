@@ -4,6 +4,11 @@
     Admin:@yield('admin-title')
 @endsection
 
+@section('head-scripts')
+    @vite(['resources/js/tinymce.js', 'resources/js/tinymce_' . Auth::user()->theme . '.js'])
+    @yield('admin-head-scripts')
+@endsection
+
 @section('content')
     <div class="text-center mb-4">
         <h5>Navigation</h5>
@@ -20,4 +25,29 @@
     </div>
 
     @yield('admin-content')
+@endsection
+
+@section('scripts')
+    @parent
+    <script type="module">
+        $(function() {
+            tinymce.init({
+                selector: '.wysiwyg',
+                height: 500,
+                menubar: false,
+                convert_urls: false,
+                plugins: [
+                    'advlist', 'autolink', 'lists', 'link', 'image',
+                    'charmap', 'anchor', 'searchreplace', 'visualblocks',
+                    'code', 'fullscreen', 'media', 'table', 'code', 'wordcount'
+                ],
+                toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | removeformat | code',
+                content_css: [
+                    '{{ Vite::asset('resources/css/app.scss') }}',
+                    '{{ Vite::asset('resources/js/tinymce_' . Auth::user()->theme . '.css') }}'
+                ],
+                target_list: false
+            });
+        });
+    </script>
 @endsection

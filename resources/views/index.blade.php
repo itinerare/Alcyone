@@ -35,13 +35,13 @@
         <div class="col">
             @if ($images->count())
                 {!! $images->render() !!}
-                    <div class="d-flex align-content-around flex-wrap flex-md-row mb-2">
-                        @foreach ($images->split(4) as $group)
-                            @foreach ($group as $image)
-                                @include('images._image_thumb')
-                            @endforeach
+                <div class="d-flex align-content-around flex-wrap flex-md-row mb-2">
+                    @foreach ($images->split(4) as $group)
+                        @foreach ($group as $image)
+                            @include('images._image_thumb')
                         @endforeach
-                    </div>
+                    @endforeach
+                </div>
                 {!! $images->render() !!}
             @endif
         </div>

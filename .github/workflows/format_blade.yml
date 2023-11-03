@@ -3,7 +3,7 @@ name: Format (Blade)
 on:
   push:
     branches:
-      - '**'
+      - 'develop'
 
 jobs:
     blade-formatter:

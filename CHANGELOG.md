@@ -4,6 +4,15 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.1.0](https://github.com/itinerare/Alcyone/compare/v1.0.1...v1.1.0) (2023-11-03)
+
+### Features
+
+* Add tinyMCE to site page editing ([c40e3f](https://github.com/itinerare/Alcyone/commit/c40e3f514d3293965fa33c1bcc13623744031495))
+
+
+---
+
 ## [1.0.1](https://github.com/itinerare/Alcyone/compare/v1.0.0...v1.0.1) (2023-11-03)
 
 ### Bug Fixes

@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.0.1](https://github.com/itinerare/Alcyone/compare/v1.0.0...v1.0.1) (2023-11-03)
+
+### Bug Fixes
+
+
+##### Images
+
+* Fix pagination ([4ce8a7](https://github.com/itinerare/Alcyone/commit/4ce8a72e4341d32b171741ceeeb6c244dc533837))
+
+
+---
+
 ## [1.0.0](https://github.com/itinerare/Alcyone/compare/25a3f8a22ef8d6d09bf8db6f9cf52ef3fc09d5c8...v1.0.0) (2023-11-03)
 
 ### Features

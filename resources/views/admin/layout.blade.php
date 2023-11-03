@@ -5,7 +5,7 @@
 @endsection
 
 @section('head-scripts')
-    @vite(['resources/js/tinymce.js', 'resources/js/tinymce_'.Auth::user()->theme.'.js'])
+    @vite(['resources/js/tinymce.js', 'resources/js/tinymce_' . Auth::user()->theme . '.js'])
     @yield('admin-head-scripts')
 @endsection
 
@@ -44,7 +44,7 @@
                 toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | removeformat | code',
                 content_css: [
                     '{{ Vite::asset('resources/css/app.scss') }}',
-                    '{{ Vite::asset('resources/js/tinymce_'.Auth::user()->theme.'.css') }}'
+                    '{{ Vite::asset('resources/js/tinymce_' . Auth::user()->theme . '.css') }}'
                 ],
                 target_list: false
             });

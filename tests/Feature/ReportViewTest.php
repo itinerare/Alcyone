@@ -67,7 +67,9 @@ class ReportViewTest extends TestCase {
             $image = ImageUpload::factory()->user($this->user->id)->create([
                 'deleted_at' => $deletedImage ? Carbon::now() : null,
             ]);
-            $this->service->testImages($image);
+            if (!$deletedImage) {
+                $this->service->testImages($image);
+            }
 
             $report = Report::factory()->image($image->id)->create($isProcessed ? [
                 'status'   => ($deletedImage ? 'Accepted' : 'Cancelled'),
@@ -103,7 +105,7 @@ class ReportViewTest extends TestCase {
             }
         }
 
-        if ($isValid) {
+        if ($isValid && !$deletedImage) {
             $this->service->testImages($image, false);
         }
     }

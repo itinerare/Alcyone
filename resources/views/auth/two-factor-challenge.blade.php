@@ -47,7 +47,7 @@
 @section('scripts')
     @parent
 
-    <script>
+    <script type="module">
         $(document).ready(function() {
             var $useRecovery = $('#useRecovery');
             var $recoveryContainer = $('#recoveryContainer');
@@ -63,8 +63,8 @@
             });
 
             function updateOptions() {
-                if (useRecovery) $recoveryContainer.removeClass('hide');
-                else $recoveryContainer.addClass('hide');
+                if (useRecovery) $recoveryContainer.removeClass('d-none');
+                else $recoveryContainer.addClass('d-none');
             }
         });
     </script>

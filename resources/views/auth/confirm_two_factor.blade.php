@@ -15,7 +15,9 @@
     <div class="row text-center mb-2">
         <div class="col-md mb-2">
             <h4>QR Code:</h4>
-            {!! $qrCode !!}
+            <div class="rounded bg-light py-2">
+                {!! $qrCode !!}
+            </div>
         </div>
 
         <div class="col-md">

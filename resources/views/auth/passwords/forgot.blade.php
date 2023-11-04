@@ -14,7 +14,7 @@
     <div class="mb-3 row">
         {!! Form::label('Email', null, ['class' => 'col-md-3 col-form-label text-md-end']) !!}
         <div class="col-md-7">
-            {!! Form::text('email', null, ['class' => 'mb-3']) !!}
+            {!! Form::text('email', null, ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="text-end">

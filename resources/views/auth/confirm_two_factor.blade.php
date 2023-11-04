@@ -29,7 +29,7 @@
     {!! Form::open(['url' => 'account/two-factor/confirm']) !!}
     <div class="mb-3">
         {!! Form::label('Confirm 2FA') !!}
-        {!! Form::text('code', null, ['class' => 'mb-3']) !!}
+        {!! Form::text('code', null, ['class' => 'form-control']) !!}
     </div>
     <div class="text-end">
         {!! Form::submit('Confirm', ['class' => 'btn btn-primary']) !!}

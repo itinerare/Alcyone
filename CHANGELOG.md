@@ -4,6 +4,20 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.1.1](https://github.com/itinerare/Alcyone/compare/v1.1.0...v1.1.1) (2023-11-05)
+
+### Bug Fixes
+
+* Fix errant form field styling ([2f8796](https://github.com/itinerare/Alcyone/commit/2f8796b9115db2d86428c5d6e17f8c2941edc6ac))
+
+##### Users
+
+* Fix 2FA challenge display, view JS ([74c7bd](https://github.com/itinerare/Alcyone/commit/74c7bdad098797fdaa808aeec7dfec607766c323))
+* Make 2FA QR code more readable ([888608](https://github.com/itinerare/Alcyone/commit/888608a35266a35762311164beffbedb5da48071))
+
+
+---
+
 ## [1.1.0](https://github.com/itinerare/Alcyone/compare/v1.0.1...v1.1.0) (2023-11-03)
 
 ### Features

@@ -141,7 +141,7 @@ class ReportViewTest extends TestCase {
         config()->set('honeypot.enabled', false);
 
         Mail::fake();
-        if ($sendNotif && $expected) {
+        if ($sendNotif) {
             User::factory()->moderator()->create([
                 'receive_admin_notifs' => 1,
             ]);

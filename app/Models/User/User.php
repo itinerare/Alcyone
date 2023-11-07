@@ -20,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail {
      */
     protected $fillable = [
         'name', 'email', 'password', 'rank_id', 'theme',
-        'is_banned', 'ban_reason', 'banned_at',
+        'is_banned', 'ban_reason', 'banned_at', 'receive_admin_notifs',
     ];
 
     /**

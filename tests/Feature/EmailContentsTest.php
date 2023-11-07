@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Mail\ReportAccepted;
 use App\Mail\ReportCancelled;
+use App\Mail\ReportSubmitted;
 use App\Models\ImageUpload;
 use App\Models\Report\Report;
 use App\Models\User\User;
@@ -37,6 +38,10 @@ class EmailContentsTest extends TestCase {
         $report = Report::factory()->image($image->id)->status($status)->create();
 
         switch ($mailType) {
+            case 'ReportSubmitted':
+                $mailable = new ReportSubmitted($report);
+                $mailable->assertHasSubject('New Content Report Submitted');
+                break;
             case 'ReportCancelled':
                 $mailable = new ReportCancelled($report);
                 $mailable->assertHasSubject('Content Report Processed');
@@ -52,8 +57,9 @@ class EmailContentsTest extends TestCase {
 
     public static function reportNotificationProvider() {
         return [
-            'declined request' => ['ReportCancelled', 'Cancelled'],
-            'accepted request' => ['ReportAccepted', 'Accepted'],
+            'new report'      => ['ReportSubmitted', 'Pending'],
+            'declined report' => ['ReportCancelled', 'Cancelled'],
+            'accepted report' => ['ReportAccepted', 'Accepted'],
         ];
     }
 }

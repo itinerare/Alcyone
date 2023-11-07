@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('settings', 'getSettings');
             Route::post('theme', 'postTheme');
             Route::post('email', 'postEmail');
+            Route::post('admin-notifs', 'postAdminNotifs');
             Route::post('password', 'postPassword');
 
             Route::get('two-factor/confirm', 'getConfirmTwoFactor');

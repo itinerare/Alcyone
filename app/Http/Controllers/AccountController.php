@@ -111,6 +111,31 @@ class AccountController extends Controller {
     }
 
     /**
+     * Changes the user's admin notification setting.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postAdminNotifs(Request $request) {
+        $request->validate([
+            'receive_admin_notifs' => 'required|boolean',
+        ]);
+
+        if (!Auth::user()->isMod) {
+            Auth::user()->update([
+                'receive_admin_notifs' => 0,
+            ]);
+            abort(404);
+        }
+
+        Auth::user()->update([
+            'receive_admin_notifs' => $request->get('receive_admin_notifs'),
+        ]);
+        flash('Admin notification preference updated successfully.')->success();
+
+        return redirect()->back();
+    }
+
+    /**
      * Enables the user's two factor auth.
      *
      * @param App\Services\UserService $service

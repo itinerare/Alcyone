@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Mail\ReportAccepted;
 use App\Mail\ReportCancelled;
+use App\Mail\ReportSubmitted;
 use App\Models\ImageUpload;
 use App\Models\Report\Report;
 use App\Models\Report\Reporter;
+use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -70,6 +72,13 @@ class ReportManager extends Service {
             ]);
             $report->key = $report->id.$report->key;
             $report->save();
+
+            // Send an email notification to relevant users
+            foreach (User::where('receive_admin_notifs', 1)->get() as $user) {
+                if ($user->isMod) {
+                    Mail::to($user->email)->send(new ReportSubmitted($report));
+                }
+            }
 
             return $this->commitReturn($report);
         } catch (\Exception $e) {

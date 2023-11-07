@@ -43,7 +43,7 @@
             </div>
             {!! Form::close() !!}
 
-            @if(Auth::user()->isMod)
+            @if (Auth::user()->isMod)
                 <h3>Admin Notifications</h3>
 
                 {!! Form::open(['url' => 'account/admin-notifs']) !!}

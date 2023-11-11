@@ -8,7 +8,7 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
-        "axios": "^1.5.1",
+        "axios": "^1.6.0",
         "blade-formatter": "^1.38.1",
         "bootstrap": "^5.3",
         "jquery": "^3.7",

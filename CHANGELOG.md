@@ -4,6 +4,33 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.2.0](https://github.com/itinerare/Alcyone/compare/v1.1.1...v1.2.0) (2023-11-12)
+
+### Features
+
+
+##### Reports
+
+* Add opt-in email notifications for new reports, tests ([81d28e](https://github.com/itinerare/Alcyone/commit/81d28eac8fece0b2e582ca81287a8ab039342580))
+
+##### Users
+
+* Add admin notification preference, tests ([3ce088](https://github.com/itinerare/Alcyone/commit/3ce088750f4754479c3b13c81e02a08715353cc8))
+
+### Bug Fixes
+
+
+##### Admin
+
+* Fix rank page verbiage ([48f972](https://github.com/itinerare/Alcyone/commit/48f97269cbb6ac0a8e91e7338b111d4a7b8972ad))
+
+##### Tests
+
+* Tweak report notif test conditions ([f4a793](https://github.com/itinerare/Alcyone/commit/f4a793aa73d7e22fdfb8974896d9f85798dbd8ca))
+
+
+---
+
 ## [1.1.1](https://github.com/itinerare/Alcyone/compare/v1.1.0...v1.1.1) (2023-11-05)
 
 ### Bug Fixes

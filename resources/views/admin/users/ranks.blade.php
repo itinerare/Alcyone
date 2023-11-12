@@ -12,12 +12,9 @@
     <p>This site uses a simple rank system to handle basic permisisons. You can edit the name and description of the site's
         ranks here. Permissions afforded to each rank are as such:</p>
     <ul>
-        <li><strong>Admin</strong>/Rank 1: Can view and edit all data on the site, including basic site settings and
-            templates. Also has the ability to manage users and ban or generate recovery information.</li>
-        <li><strong>Editor</strong>/Rank 2: Can view and edit all regular site information (pages), but cannot access the
-            admin panel.</li>
-        <li><strong>Member</strong>/Rank 3: Can view all regular site information even when the site is set to be private
-            (visitors cannot view).</li>
+        <li><strong>Admin</strong>/Rank 1: Can view and edit basic site settings and manage, including ban, users. Also has access to the reports queue.</li>
+        <li><strong>Moderator</strong>/Rank 2: Can view the reports queue, but cannot access other admin panel functions.</li>
+        <li><strong>Member</strong>/Rank 3: A regular user.</li>
     </ul>
     <p>Users are given the basic/member rank by default. To assign a rank to a user, find their admin page from the <a href="{{ url('admin/users') }}">User Index</a> and change their rank there.</p>
 

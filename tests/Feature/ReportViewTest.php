@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Mail\ReportSubmitted;
 use App\Models\ImageUpload;
 use App\Models\Report\Report;
 use App\Models\User\User;
@@ -9,6 +10,7 @@ use App\Services\ImageManager;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class ReportViewTest extends TestCase {
@@ -130,12 +132,20 @@ class ReportViewTest extends TestCase {
      *
      * @param bool  $user
      * @param array $validity
+     * @param bool  $sendNotif
      * @param bool  $expected
      */
-    public function testPostReport($user, $validity, $expected) {
+    public function testPostReport($user, $validity, $sendNotif, $expected) {
         // Disable honeypot temporarily
         // otherwise the speed at which tests are run will cause it to trigger
         config()->set('honeypot.enabled', false);
+
+        Mail::fake();
+        if ($sendNotif) {
+            User::factory()->moderator()->create([
+                'receive_admin_notifs' => 1,
+            ]);
+        }
 
         if ($validity[0]) {
             // Generate an image to report
@@ -174,10 +184,17 @@ class ReportViewTest extends TestCase {
             } else {
                 $this->assertDatabaseCount('reporters', 1);
             }
+
+            if ($sendNotif) {
+                Mail::assertSent(ReportSubmitted::class);
+            } else {
+                Mail::assertNotSent(ReportSubmitted::class);
+            }
         } else {
             $response->assertSessionHasErrors();
             $this->assertDatabaseEmpty('reports');
             $this->assertDatabaseEmpty('reporters');
+            Mail::assertNotSent(ReportSubmitted::class);
         }
 
         if ($validity[0]) {
@@ -189,38 +206,71 @@ class ReportViewTest extends TestCase {
         return [
             // $validity = [$withImage, $withReason, $withEmail, $withAgreement]
 
-            'visitor, with image (web), reason, agree'        => [0, ['web', 1, 0, 1], 1],
-            'visitor, with image (png), reason, agree'        => [0, ['png', 1, 0, 1], 1],
-            'visitor, with image (web), reason, email, agree' => [0, ['web', 1, 1, 1], 1],
-            'visitor, with image (png), reason, email, agree' => [0, ['png', 1, 1, 1], 1],
-            'visitor, with image (web), email, agree'         => [0, ['web', 0, 1, 1], 0],
-            'visitor, with image (png), email, agree'         => [0, ['png', 0, 1, 1], 0],
-            'visitor, with image (web), reason'               => [0, ['web', 0, 0, 0], 0],
-            'visitor, with image (png), reason'               => [0, ['png', 0, 0, 0], 0],
-            'visitor, with image (web), reason'               => [0, ['web', 1, 0, 0], 0],
-            'visitor, with image (png), reason'               => [0, ['png', 1, 0, 0], 0],
-            'visitor, with image (web), reason, email'        => [0, ['web', 1, 1, 0], 0],
-            'visitor, with image (png), reason, email'        => [0, ['png', 1, 1, 0], 0],
-            'visitor'                                         => [0, [null, 0, 0, 0], 0],
-            'visitor, with reason'                            => [0, [null, 1, 0, 0], 0],
-            'visitor, with email'                             => [0, [null, 0, 1, 0], 0],
-            'visitor, with reason, email'                     => [0, [null, 1, 1, 0], 0],
-            'user, with image (web), reason, agree'           => [1, ['web', 1, 0, 1], 1],
-            'user, with image (png), reason, agree'           => [1, ['png', 1, 0, 1], 1],
-            'user, with image (web), reason, email, agree'    => [1, ['web', 1, 1, 1], 1],
-            'user, with image (png), reason, email, agree'    => [1, ['png', 1, 1, 1], 1],
-            'user, with image (web), email, agree'            => [1, ['web', 0, 1, 1], 0],
-            'user, with image (png), email, agree'            => [1, ['png', 0, 1, 1], 0],
-            'user, with image (web), reason'                  => [1, ['web', 0, 0, 0], 0],
-            'user, with image (png), reason'                  => [1, ['png', 0, 0, 0], 0],
-            'user, with image (web), reason'                  => [1, ['web', 1, 0, 0], 0],
-            'user, with image (png), reason'                  => [1, ['png', 1, 0, 0], 0],
-            'user, with image (web), reason, email'           => [1, ['web', 1, 1, 0], 0],
-            'user, with image (png), reason, email'           => [1, ['png', 1, 1, 0], 0],
-            'user'                                            => [1, [null, 0, 0, 0], 0],
-            'user, with reason'                               => [1, [null, 1, 0, 0], 0],
-            'user, with email'                                => [1, [null, 0, 1, 0], 0],
-            'user, with reason, email'                        => [1, [null, 1, 1, 0], 0],
+            'visitor, with image (web), reason, agree'               => [0, ['web', 1, 0, 1], 0, 1],
+            'visitor, with image (png), reason, agree'               => [0, ['png', 1, 0, 1], 0, 1],
+            'visitor, with image (web), reason, agree, notif'        => [0, ['web', 1, 0, 1], 1, 1],
+            'visitor, with image (png), reason, agree, notif'        => [0, ['png', 1, 0, 1], 1, 1],
+            'visitor, with image (web), reason, email, agree'        => [0, ['web', 1, 1, 1], 0, 1],
+            'visitor, with image (png), reason, email, agree'        => [0, ['png', 1, 1, 1], 0, 1],
+            'visitor, with image (web), reason, email, agree, notif' => [0, ['web', 1, 1, 1], 1, 1],
+            'visitor, with image (png), reason, email, agree, notif' => [0, ['png', 1, 1, 1], 1, 1],
+            'visitor, with image (web), email, agree'                => [0, ['web', 0, 1, 1], 0, 0],
+            'visitor, with image (png), email, agree'                => [0, ['png', 0, 1, 1], 0, 0],
+            'visitor, with image (web), email, agree, notif'         => [0, ['web', 0, 1, 1], 1, 0],
+            'visitor, with image (png), email, agree, notif'         => [0, ['png', 0, 1, 1], 1, 0],
+            'visitor, with image (web)'                              => [0, ['web', 0, 0, 0], 0, 0],
+            'visitor, with image (png)'                              => [0, ['png', 0, 0, 0], 0, 0],
+            'visitor, with image (web), notif'                       => [0, ['web', 0, 0, 0], 1, 0],
+            'visitor, with image (png), notif'                       => [0, ['png', 0, 0, 0], 1, 0],
+            'visitor, with image (web), reason'                      => [0, ['web', 1, 0, 0], 0, 0],
+            'visitor, with image (png), reason'                      => [0, ['png', 1, 0, 0], 0, 0],
+            'visitor, with image (web), reason, notif'               => [0, ['web', 1, 0, 0], 1, 0],
+            'visitor, with image (png), reason, notif'               => [0, ['png', 1, 0, 0], 1, 0],
+            'visitor, with image (web), reason, email'               => [0, ['web', 1, 1, 0], 0, 0],
+            'visitor, with image (png), reason, email'               => [0, ['png', 1, 1, 0], 0, 0],
+            'visitor, with image (web), reason, email, notif'        => [0, ['web', 1, 1, 0], 1, 0],
+            'visitor, with image (png), reason, email, notif'        => [0, ['png', 1, 1, 0], 1, 0],
+            'visitor'                                                => [0, [null, 0, 0, 0], 0, 0],
+            'visitor, notif'                                         => [0, [null, 0, 0, 0], 1, 0],
+            'visitor, with reason'                                   => [0, [null, 1, 0, 0], 0, 0],
+            'visitor, with reason, notif'                            => [0, [null, 1, 0, 0], 1, 0],
+            'visitor, with email'                                    => [0, [null, 0, 1, 0], 0, 0],
+            'visitor, with email, notif'                             => [0, [null, 0, 1, 0], 1, 0],
+            'visitor, with reason, email'                            => [0, [null, 1, 1, 0], 0, 0],
+            'visitor, with reason, email, notif'                     => [0, [null, 1, 1, 0], 1, 0],
+
+            'user, with image (web), reason, agree'                  => [1, ['web', 1, 0, 1], 0, 1],
+            'user, with image (png), reason, agree'                  => [1, ['png', 1, 0, 1], 0, 1],
+            'user, with image (web), reason, agree, notif'           => [1, ['web', 1, 0, 1], 1, 1],
+            'user, with image (png), reason, agree, notif'           => [1, ['png', 1, 0, 1], 1, 1],
+            'user, with image (web), reason, email, agree'           => [1, ['web', 1, 1, 1], 0, 1],
+            'user, with image (png), reason, email, agree'           => [1, ['png', 1, 1, 1], 0, 1],
+            'user, with image (web), reason, email, agree, notif'    => [1, ['web', 1, 1, 1], 1, 1],
+            'user, with image (png), reason, email, agree, notif'    => [1, ['png', 1, 1, 1], 1, 1],
+            'user, with image (web), email, agree'                   => [1, ['web', 0, 1, 1], 0, 0],
+            'user, with image (png), email, agree'                   => [1, ['png', 0, 1, 1], 0, 0],
+            'user, with image (web), email, agree, notif'            => [1, ['web', 0, 1, 1], 1, 0],
+            'user, with image (png), email, agree, notif'            => [1, ['png', 0, 1, 1], 1, 0],
+            'user, with image (web), reason'                         => [1, ['web', 0, 0, 0], 0, 0],
+            'user, with image (png), reason'                         => [1, ['png', 0, 0, 0], 0, 0],
+            'user, with image (web), reason, notif'                  => [1, ['web', 0, 0, 0], 1, 0],
+            'user, with image (png), reason, notif'                  => [1, ['png', 0, 0, 0], 1, 0],
+            'user, with image (web), reason'                         => [1, ['web', 1, 0, 0], 0, 0],
+            'user, with image (png), reason'                         => [1, ['png', 1, 0, 0], 0, 0],
+            'user, with image (web), reason, notif'                  => [1, ['web', 1, 0, 0], 1, 0],
+            'user, with image (png), reason, notif'                  => [1, ['png', 1, 0, 0], 1, 0],
+            'user, with image (web), reason, email'                  => [1, ['web', 1, 1, 0], 0, 0],
+            'user, with image (png), reason, email'                  => [1, ['png', 1, 1, 0], 0, 0],
+            'user, with image (web), reason, email, notif'           => [1, ['web', 1, 1, 0], 1, 0],
+            'user, with image (png), reason, email, notif'           => [1, ['png', 1, 1, 0], 1, 0],
+            'user'                                                   => [1, [null, 0, 0, 0], 0, 0],
+            'user, notif'                                            => [1, [null, 0, 0, 0], 1, 0],
+            'user, with reason'                                      => [1, [null, 1, 0, 0], 0, 0],
+            'user, with reason, notif'                               => [1, [null, 1, 0, 0], 1, 0],
+            'user, with email'                                       => [1, [null, 0, 1, 0], 0, 0],
+            'user, with email, notif'                                => [1, [null, 0, 1, 0], 1, 0],
+            'user, with reason, email'                               => [1, [null, 1, 1, 0], 0, 0],
+            'user, with reason, email, notif'                        => [1, [null, 1, 1, 0], 1, 0],
         ];
     }
 }

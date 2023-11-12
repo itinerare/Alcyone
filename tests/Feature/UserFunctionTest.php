@@ -86,6 +86,37 @@ class UserFunctionTest extends TestCase {
     }
 
     /**
+     * Test admin notificatin preference editing.
+     *
+     * @dataProvider userEditProvider
+     *
+     * @param bool $isValid
+     * @param bool $expected
+     */
+    public function testPostEditAdminNotifs($isValid, $expected) {
+        if ($isValid) {
+            $user = User::factory()->moderator()->create();
+        } else {
+            $user = $this->user;
+        }
+
+        $response = $this->actingAs($user)
+            ->post('account/admin-notifs', [
+                'receive_admin_notifs' => 1,
+            ]);
+
+        if ($expected) {
+            $response->assertSessionHasNoErrors();
+            $this->assertDatabaseHas('users', [
+                'id'                   => $user->id,
+                'receive_admin_notifs' => 1,
+            ]);
+        } else {
+            $response->assertStatus(404);
+        }
+    }
+
+    /**
      * Test password editing.
      *
      * @dataProvider userEditProvider

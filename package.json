@@ -8,8 +8,8 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
-        "axios": "^1.5.1",
-        "blade-formatter": "^1.38.1",
+        "axios": "^1.6.0",
+        "blade-formatter": "^1.38.6",
         "bootstrap": "^5.3",
         "jquery": "^3.7",
         "laravel-vite-plugin": "^0.8.1",
@@ -17,9 +17,9 @@
         "lodash": "^4.17.19",
         "magnific-popup": "^1.1.0",
         "postcss": "^8.4.31",
-        "sass": "^1.68.0"
+        "sass": "^1.69.5"
     },
-    "version": "1.1.1",
+    "version": "1.2.0",
     "dependencies": {
         "tinymce": "^6.7.2"
     }

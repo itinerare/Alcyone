@@ -42,6 +42,24 @@
                 {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
             </div>
             {!! Form::close() !!}
+
+            @if (Auth::user()->isMod)
+                <h3>Admin Notifications</h3>
+
+                {!! Form::open(['url' => 'account/admin-notifs']) !!}
+                <div class="mb-3 row">
+                    <label class="col-md-2 col-form-label">
+                        Receive Admin Notifications {!! add_help('Whether or not you would like to receive an email notification when a new report is submitted.') !!}
+                    </label>
+                    <div class="col-md-10">
+                        {!! Form::checkbox('receive_admin_notifs', 1, Auth::user()->receive_admin_notifs, ['class' => 'form-check mt-3']) !!}
+                    </div>
+                </div>
+                <div class="text-end">
+                    {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+                </div>
+                {!! Form::close() !!}
+            @endif
         </div>
     </div>
 

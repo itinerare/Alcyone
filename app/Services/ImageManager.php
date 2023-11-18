@@ -54,8 +54,7 @@ class ImageManager extends Service {
             }
 
             // Process and save thumbnail from the image
-            $thumbnail = Image::make($image->imagePath.'/'.$image->imageFileName);
-            $thumbnail
+            $thumbnail = Image::make($image->imagePath.'/'.$image->imageFileName)
                 ->resize(null, config('alcyone.settings.thumbnail_height'), function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();

@@ -6,6 +6,7 @@ use App\Facades\Notifications;
 use App\Models\ImageUpload;
 use App\Models\Report\Report;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
@@ -39,10 +40,22 @@ class ImageManager extends Service {
 
             // Save image before doing any processing
             $this->handleImage($data['image'], $image->imagePath, $image->imageFileName);
-            Image::make($image->imagePath.'/'.$image->imageFileName)->save($image->imagePath.'/'.$image->imageFileName, null, 'webp');
+
+            $imageProperties = getimagesize($image->imagePath.'/'.$image->imageFileName);
+            // Convert image if necessary
+            if ($imageProperties['mime'] != 'image/webp') {
+                if ($imageProperties[0] > 3000 || $imageProperties[1] > 3000) {
+                    // For large images (in terms of dimensions),
+                    // use imagick instead, as it's better at handling them
+                    Config::set('image.driver', 'imagick');
+                }
+                Image::make($image->imagePath.'/'.$image->imageFileName)
+                    ->save($image->imagePath.'/'.$image->imageFileName, null, 'webp');
+            }
 
             // Process and save thumbnail from the image
-            $thumbnail = Image::make($image->imagePath.'/'.$image->imageFileName)
+            $thumbnail = Image::make($image->imagePath.'/'.$image->imageFileName);
+            $thumbnail
                 ->resize(null, config('alcyone.settings.thumbnail_height'), function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();

@@ -219,11 +219,11 @@ class ImageUploadTest extends TestCase {
     public function testPostUploadImage($fileData, $expected) {
         if ($fileData[0]) {
             $file = UploadedFile::fake()
-                ->image('test_image.png', 2000, 2000)
-                ->size($fileData[1] ? 10000 : 20000);
+                ->image('test_image.png', ($fileData[1] ? 4000 : 2000), ($fileData[1] ? 4000 : 2000))
+                ->size($fileData[2] ? 10000 : 20000);
         } else {
             $file = UploadedFile::fake()
-                ->create('invalid.pdf', $fileData[1] ? 10000 : 20000);
+                ->create('invalid.pdf', $fileData[2] ? 10000 : 20000);
         }
 
         $response = $this
@@ -239,6 +239,14 @@ class ImageUploadTest extends TestCase {
             $image = ImageUpload::where('user_id', $this->user->id)->first();
             $this->assertModelExists($image);
 
+            // Large images should use imagick as their driver
+            // Verify that this is the case, but only for these images
+            if ($fileData[1]) {
+                $this->assertTrue(config('image.driver') == 'imagick');
+            } else {
+                $this->assertTrue(config('image.driver') == 'gd');
+            }
+
             $this->assertFileExists($image->imagePath.'/'.$image->imageFileName);
             $this->assertFileExists($image->imagePath.'/'.$image->thumbnailFileName);
 
@@ -251,12 +259,14 @@ class ImageUploadTest extends TestCase {
 
     public static function postUploadImageProvider() {
         return [
-            // $fileData = [$isImage, $isValid]
+            // $fileData = [$isImage, $isLarge, $isValid]
 
-            'valid image'   => [[1, 1], 1],
-            'invalid image' => [[1, 0], 0],
-            'valid file'    => [[0, 1], 0],
-            'invalid file'  => [[0, 0], 0],
+            'valid image'         => [[1, 0, 1], 1],
+            'large valid image'   => [[1, 1, 1], 1],
+            'invalid image'       => [[1, 0, 0], 0],
+            'large invalid image' => [[1, 1, 0], 0],
+            'valid file'          => [[0, 0, 1], 0],
+            'invalid file'        => [[0, 0, 0], 0],
         ];
     }
 

@@ -44,7 +44,7 @@ class ImageManager extends Service {
             $imageProperties = getimagesize($image->imagePath.'/'.$image->imageFileName);
             // Convert image if necessary
             if ($imageProperties['mime'] != 'image/webp') {
-                if($imageProperties[0] > 3000 || $imageProperties[1] > 3000) {
+                if ($imageProperties[0] > 3000 || $imageProperties[1] > 3000) {
                     // For large images (in terms of dimensions),
                     // use imagick instead, as it's better at handling them
                     Config::set('image.driver', 'imagick');

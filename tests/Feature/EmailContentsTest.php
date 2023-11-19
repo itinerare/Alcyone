@@ -52,7 +52,11 @@ class EmailContentsTest extends TestCase {
                 break;
         }
 
-        $mailable->assertSeeInHtml($report->url);
+        if ($mailType == 'ReportSubmitted') {
+            $mailable->assertSeeInHtml($report->adminUrl);
+        } else {
+            $mailable->assertSeeInHtml($report->url);
+        }
     }
 
     public static function reportNotificationProvider() {

@@ -4,6 +4,25 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.3.0](https://github.com/itinerare/Alcyone/compare/v1.2.0...v1.3.0) (2023-11-19)
+
+### Features
+
+
+##### Images
+
+* Use ImageMagick for larger images ([41d131](https://github.com/itinerare/Alcyone/commit/41d131a47842c7ca265d2211a0208e201cc3d938))
+
+### Bug Fixes
+
+
+##### Reports
+
+* Use admin URL in report notif mail ([27ca6c](https://github.com/itinerare/Alcyone/commit/27ca6cd9dd7367d3e3bcaf1ce90713884e9bb22e))
+
+
+---
+
 ## [1.2.0](https://github.com/itinerare/Alcyone/compare/v1.1.1...v1.2.0) (2023-11-12)
 
 ### Features

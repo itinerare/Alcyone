@@ -2,7 +2,7 @@
 
 A new content report has been submitted for image #{{ $image->id }}.
 
-<x-mail::button :url="$report->url" color="primary">
+<x-mail::button :url="$report->adminUrl" color="primary">
     View Report
 </x-mail::button>
 

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Facades\Notifications;
 use App\Models\ImageUpload;
 use App\Models\Report\Report;
+use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -54,12 +55,59 @@ class ImageManager extends Service {
             }
 
             // Process and save thumbnail from the image
-            $thumbnail = Image::make($image->imagePath.'/'.$image->imageFileName)
+            Image::make($image->imagePath.'/'.$image->imageFileName)
                 ->resize(null, config('alcyone.settings.thumbnail_height'), function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
                 ->save($image->thumbnailPath.'/'.$image->thumbnailFileName, null, 'webp');
+
+            return $this->commitReturn($image);
+        } catch (\Exception $e) {
+            $this->setError('error', $e->getMessage());
+        }
+
+        return $this->rollbackReturn(false);
+    }
+
+    /**
+     * Converts an image upload.
+     *
+     * @param \App\Models\ImageUpload $image
+     *
+     * @return bool
+     */
+    public function convertImage($image) {
+        DB::beginTransaction();
+
+        try {
+            // If there's no cached copy of the converted image, create one
+            if (!file_exists($image->convertedPath.'/'.$image->convertedFileName)) {
+                if (!file_exists($image->convertedPath)) {
+                    // Create the directory.
+                    if (!mkdir($image->convertedPath, 0755, true)) {
+                        $this->setError('error', 'Failed to create image directory.');
+
+                        return false;
+                    }
+                    chmod($image->convertedPath, 0755);
+                }
+
+                $imageProperties = getimagesize($image->imagePath.'/'.$image->imageFileName);
+                if ($imageProperties[0] > 3000 || $imageProperties[1] > 3000) {
+                    // For large images (in terms of dimensions),
+                    // use imagick instead, as it's better at handling them
+                    Config::set('image.driver', 'imagick');
+                }
+
+                Image::make($image->imagePath.'/'.$image->imageFileName)
+                    ->save($image->convertedPath.'/'.$image->convertedFileName, null, 'png');
+
+                // Save the expiry time for the cached image
+                $image->update([
+                    'cache_expiry' => Carbon::now()->addHours(config('alcyone.settings.cache_lifetime')),
+                ]);
+            }
 
             return $this->commitReturn($image);
         } catch (\Exception $e) {

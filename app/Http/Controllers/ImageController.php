@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ImageUpload;
 use App\Services\ImageManager;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
 
 class ImageController extends Controller {
     /*
@@ -40,35 +38,19 @@ class ImageController extends Controller {
     /**
      * Show an image in PNG format.
      *
-     * @param string $slug
+     * @param string                    $slug
+     * @param App\Services\ImageManager $service
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getConvertedImage($slug) {
+    public function getConvertedImage($slug, ImageManager $service) {
         $image = ImageUpload::get()->where('slug', $slug)->first();
         if (!$image) {
             abort(404);
         }
 
-        // If there's no cached copy of the converted image, create one
         if (!file_exists($image->convertedPath.'/'.$image->convertedFileName)) {
-            if (!file_exists($image->convertedPath)) {
-                // Create the directory.
-                if (!mkdir($image->convertedPath, 0755, true)) {
-                    $this->setError('error', 'Failed to create image directory.');
-
-                    return false;
-                }
-                chmod($image->convertedPath, 0755);
-            }
-
-            $file = Image::make($image->imagePath.'/'.$image->imageFileName)
-                ->save($image->convertedPath.'/'.$image->convertedFileName, null, 'png');
-
-            // Save the expiry time for the cached image
-            $image->update([
-                'cache_expiry' => Carbon::now()->addHours(config('alcyone.settings.cache_lifetime')),
-            ]);
+            $service->convertImage($image);
         }
 
         return response()->file($image->convertedPath.'/'.$image->convertedFileName);

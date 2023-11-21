@@ -8,7 +8,7 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
-        "axios": "^1.6.1",
+        "axios": "^1.6.2",
         "blade-formatter": "^1.38.6",
         "bootstrap": "^5.3",
         "jquery": "^3.7",
@@ -21,6 +21,6 @@
     },
     "version": "1.3.0",
     "dependencies": {
-        "tinymce": "^6.7.2"
+        "tinymce": "^6.7.3"
     }
 }

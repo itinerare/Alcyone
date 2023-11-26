@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.4.0](https://github.com/itinerare/Alcyone/compare/v1.3.0...v1.4.0) (2023-11-26)
+
+### Features
+
+
+##### Images
+
+* Use imagick for share image conversion ([b93363](https://github.com/itinerare/Alcyone/commit/b9336373875adbf912dd2a49f1c08d31690ec949))
+
+
+---
+
 ## [1.3.0](https://github.com/itinerare/Alcyone/compare/v1.2.0...v1.3.0) (2023-11-19)
 
 ### Features

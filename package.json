@@ -21,6 +21,6 @@
     },
     "version": "1.4.0",
     "dependencies": {
-        "tinymce": "^6.7.3"
+        "tinymce": "^6.8.0"
     }
 }

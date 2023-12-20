@@ -10,7 +10,11 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
+use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
+use Intervention\Image\Encoders\GifEncoder;
+use Intervention\Image\Encoders\WebpEncoder;
+use Intervention\Image\ImageManager as InterventionImageManager;
 
 class ImageManager extends Service {
     /*
@@ -37,30 +41,42 @@ class ImageManager extends Service {
             $image = ImageUpload::create([
                 'user_id' => $user->id,
                 'key'     => randomString(15),
+                'is_gif'  => $data['image']->getClientOriginalExtension() == 'gif' ?? 0,
             ]);
 
             // Save image before doing any processing
             $this->handleImage($data['image'], $image->imagePath, $image->imageFileName);
 
             $imageProperties = getimagesize($image->imagePath.'/'.$image->imageFileName);
-            // Convert image if necessary
-            if ($imageProperties['mime'] != 'image/webp') {
-                if ($imageProperties[0] > 3000 || $imageProperties[1] > 3000) {
-                    // For large images (in terms of dimensions),
-                    // use imagick instead, as it's better at handling them
-                    Config::set('image.driver', 'imagick');
-                }
-                Image::make($image->imagePath.'/'.$image->imageFileName)
-                    ->save($image->imagePath.'/'.$image->imageFileName, null, 'webp');
+
+            if (filesize($image->imagePath.'/'.$image->imageFileName) > '8000000' && $imageProperties['mime'] == 'image/gif') {
+                // Handling for GIFs specifically, since they are not converted
+                // so as to preserve any animation
+                throw new \Exception('GIFs may only be up to 8MB in size.');
+            }
+
+            if ($imageProperties[0] > 2000 || $imageProperties[1] > 2000) {
+                // For large images (in terms of dimensions),
+                // use imagick instead, as it's better at handling them
+                $manager = new InterventionImageManager(ImagickDriver::class);
+                // This no longer is needed but is useful for testing
+                Config::set('image.driver', 'imagick');
+            } else {
+                $manager = new InterventionImageManager(GdDriver::class);
+            }
+
+            // Convert image if necessary, preserving quality as best possible
+            if ($imageProperties['mime'] != 'image/webp' && !$image->is_gif) {
+                $manager->read($image->imagePath.'/'.$image->imageFileName)
+                    ->toWebp(90)
+                    ->save($image->imagePath.'/'.$image->imageFileName);
             }
 
             // Process and save thumbnail from the image
-            Image::make($image->imagePath.'/'.$image->imageFileName)
-                ->resize(null, config('alcyone.settings.thumbnail_height'), function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
-                ->save($image->thumbnailPath.'/'.$image->thumbnailFileName, null, 'webp');
+            $manager->read($image->imagePath.'/'.$image->imageFileName)
+                ->scaleDown(height: config('alcyone.settings.thumbnail_height'))
+                ->encode($image->is_gif ? (new GifEncoder()) : (new WebpEncoder(90)))
+                ->save($image->thumbnailPath.'/'.$image->thumbnailFileName);
 
             return $this->commitReturn($image);
         } catch (\Exception $e) {
@@ -94,14 +110,19 @@ class ImageManager extends Service {
                 }
 
                 $imageProperties = getimagesize($image->imagePath.'/'.$image->imageFileName);
-                if ($imageProperties[0] > 3000 || $imageProperties[1] > 3000) {
+                if ($imageProperties[0] > 2000 || $imageProperties[1] > 2000) {
                     // For large images (in terms of dimensions),
                     // use imagick instead, as it's better at handling them
+                    $manager = new InterventionImageManager(ImagickDriver::class);
+                    // This no longer is needed but is useful for testing
                     Config::set('image.driver', 'imagick');
+                } else {
+                    $manager = new InterventionImageManager(GdDriver::class);
                 }
 
-                Image::make($image->imagePath.'/'.$image->imageFileName)
-                    ->save($image->convertedPath.'/'.$image->convertedFileName, null, 'png');
+                $manager->read($image->imagePath.'/'.$image->imageFileName)
+                    ->toPng(90)
+                    ->save($image->convertedPath.'/'.$image->convertedFileName);
 
                 // Save the expiry time for the cached image
                 $image->update([

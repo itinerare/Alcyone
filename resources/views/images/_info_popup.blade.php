@@ -8,13 +8,15 @@
         <div class="col-xl-3 col-md-4 col">
             <div class="card-body ps-md-0">
                 <div class="mb-3">
-                    {!! Form::label('web_url', 'For Web: (WebP)', ['class' => 'form-label']) !!}
+                    {!! Form::label('web_url', !$image->is_gif ? 'For Web: (WebP)' : 'URL: (GIF)', ['class' => 'form-label']) !!}
                     @include('widgets._url_display', ['url' => $image->imageUrl, 'urlName' => 'web_url', 'formClass' => 'bg-body'])
                 </div>
-                <div class="mb-3">
-                    {!! Form::label('share_url', 'For Sharing: (PNG)', ['class' => 'form-label']) !!}
-                    @include('widgets._url_display', ['url' => url('images/converted/' . $image->slug), 'urlName' => 'share_url', 'formClass' => 'bg-body'])
-                </div>
+                @if(!$image->is_gif)
+                    <div class="mb-3">
+                        {!! Form::label('share_url', 'For Sharing: (PNG)', ['class' => 'form-label']) !!}
+                        @include('widgets._url_display', ['url' => url('images/converted/' . $image->slug), 'urlName' => 'share_url', 'formClass' => 'bg-body'])
+                    </div>
+                @endif
                 <hr />
                 Uploaded {!! $image->created_at->format('d F Y') !!}
                 <div id="deleteImage" class="d-none mt-3">

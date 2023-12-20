@@ -161,7 +161,6 @@ return [
          */
         App\Providers\FortifyServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...

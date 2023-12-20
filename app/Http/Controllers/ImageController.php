@@ -45,7 +45,7 @@ class ImageController extends Controller {
      */
     public function getConvertedImage($slug, ImageManager $service) {
         $image = ImageUpload::get()->where('slug', $slug)->first();
-        if (!$image) {
+        if (!$image || $image->is_gif) {
             abort(404);
         }
 

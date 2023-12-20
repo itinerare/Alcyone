@@ -17,7 +17,7 @@ jobs:
                   ref: ${{ github.head_ref }}
 
             - name: Install
-              run: composer install
+              run: composer install --ignore-platform-reqs
 
             - name: Run pint
               run: composer lint

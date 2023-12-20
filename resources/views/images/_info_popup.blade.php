@@ -11,7 +11,7 @@
                     {!! Form::label('web_url', !$image->is_gif ? 'For Web: (WebP)' : 'URL: (GIF)', ['class' => 'form-label']) !!}
                     @include('widgets._url_display', ['url' => $image->imageUrl, 'urlName' => 'web_url', 'formClass' => 'bg-body'])
                 </div>
-                @if(!$image->is_gif)
+                @if (!$image->is_gif)
                     <div class="mb-3">
                         {!! Form::label('share_url', 'For Sharing: (PNG)', ['class' => 'form-label']) !!}
                         @include('widgets._url_display', ['url' => url('images/converted/' . $image->slug), 'urlName' => 'share_url', 'formClass' => 'bg-body'])

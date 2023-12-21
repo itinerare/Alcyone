@@ -19,8 +19,8 @@
                     </div>
 
                     <div class="p-2">
-                        {!! Form::label('mainImage', 'Upload File') !!}
-                        {!! Form::file('image', ['id' => 'mainImage']) !!}<br />
+                        {!! Form::label('mainImage', 'Upload File', ['class' => 'form-label']) !!}
+                        {!! Form::file('image', ['id' => 'mainImage', 'class' => 'form-control']) !!}
                         <small>Images may be PNG, JPEG, or WebP and up to
                             {{ min((int) ini_get('upload_max_filesize'), (int) ini_get('post_max_size'), '17') }}MB in size, or GIF and up to {{ min((int) ini_get('upload_max_filesize'), (int) ini_get('post_max_size'), '8') }}MB in size.</small>
                     </div>

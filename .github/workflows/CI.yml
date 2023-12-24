@@ -1,0 +1,24 @@
+name: Lint & Build Vite Assets
+
+on:
+  pull_request:
+    branches:
+      - 'develop'
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+
+jobs:
+  lint:
+    uses: itinerare/github-actions/.github/workflows/lint.yml@main
+    with:
+      php-version: '8.1'
+    concurrency:
+      group: ci-${{ github.head_ref }}
+
+  rebuild-vite-assets:
+    uses: itinerare/github-actions/.github/workflows/vite_build.yml@main
+    concurrency:
+      group: ci-${{ github.head_ref }}

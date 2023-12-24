@@ -19,7 +19,7 @@
         "postcss": "^8.4.32",
         "sass": "^1.69.5"
     },
-    "version": "1.4.0",
+    "version": "1.5.0",
     "dependencies": {
         "tinymce": "^6.8.2"
     }

@@ -15,7 +15,7 @@ class ImageUpload extends Model {
      * @var array
      */
     protected $fillable = [
-        'user_id', 'key', 'cache_expiry',
+        'user_id', 'key', 'is_gif', 'cache_expiry',
     ];
 
     /**
@@ -94,7 +94,7 @@ class ImageUpload extends Model {
      * @return string
      */
     public function getImageFileNameAttribute() {
-        return $this->slug.'.webp';
+        return $this->slug.'.'.($this->is_gif ? 'gif' : 'webp');
     }
 
     /**
@@ -157,7 +157,7 @@ class ImageUpload extends Model {
      * @return string
      */
     public function getThumbnailFileNameAttribute() {
-        return $this->slug.'_th.webp';
+        return $this->slug.'_th.'.($this->is_gif ? 'gif' : 'webp');
     }
 
     /**

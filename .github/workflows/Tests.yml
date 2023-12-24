@@ -21,4 +21,4 @@ jobs:
     uses: itinerare/github-actions/.github/workflows/laravel_tests.yml@main
     with:
       php-version: ${{ matrix.target }}
-      db-name: 'alycone_test'
+      db-name: 'alcyone_test'

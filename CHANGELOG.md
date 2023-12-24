@@ -4,6 +4,19 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.5.0](https://github.com/itinerare/Alcyone/compare/v1.4.0...v1.5.0) (2023-12-24)
+
+### Features
+
+* Use bootstrap file upload field styling ([e57d71](https://github.com/itinerare/Alcyone/commit/e57d7134a7786424197538bbe2af68ee0a6e6104))
+
+##### Images
+
+* Update to intervention/image v3, support animated GIFs ([7da33e](https://github.com/itinerare/Alcyone/commit/7da33ec506b61d527fa108061b5216031280c9aa))
+
+
+---
+
 ## [1.4.0](https://github.com/itinerare/Alcyone/compare/v1.3.0...v1.4.0) (2023-11-26)
 
 ### Features

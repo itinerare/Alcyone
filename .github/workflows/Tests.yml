@@ -23,5 +23,5 @@ jobs:
       php-version: ${{ matrix.target }}
       db-name: 'alcyone_test'
     concurrency:
-      group: tests-${{ github.ref }}
+      group: tests-${{ matrix.target }}-${{ github.ref }}
       cancel-in-progress: true

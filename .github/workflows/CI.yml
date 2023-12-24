@@ -16,14 +16,17 @@ jobs:
     with:
       php-version: '8.1'
     concurrency:
-      group: ci-${{ github.ref }}
+      group: ci-${{ github.head_ref }}
+      cancel-in-progress: true
 
   blade-formatter:
     uses: itinerare/github-actions/.github/workflows/blade_formatter.yml@main
     concurrency:
-      group: ci-${{ github.ref }}
+      group: ci-${{ github.head_ref }}
+      cancel-in-progress: true
 
   rebuild-vite-assets:
     uses: itinerare/github-actions/.github/workflows/vite_build.yml@main
     concurrency:
-      group: ci-${{ github.ref }}
+      group: ci-${{ github.head_ref }}
+      cancel-in-progress: true

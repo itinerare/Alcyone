@@ -3,7 +3,8 @@ name: Laravel Tests
 on:
   push:
     branches:
-      - '**'
+      - 'main'
+      - 'develop'
   pull_request:
     branches:
       - '**'

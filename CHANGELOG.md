@@ -4,6 +4,19 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.5.1](https://github.com/itinerare/Alcyone/compare/v1.5.0...v1.5.1) (2024-01-14)
+
+### Bug Fixes
+
+
+##### Users
+
+* Autofill email in password reset form ([2de042](https://github.com/itinerare/Alcyone/commit/2de04269ec710c93352201ba15215886244f5baf))
+* Better feedback on password reset flow ([95ddfb](https://github.com/itinerare/Alcyone/commit/95ddfb0c2f3e136cecb3761e351cbccd122c6be7))
+
+
+---
+
 ## [1.5.0](https://github.com/itinerare/Alcyone/compare/v1.4.0...v1.5.0) (2023-12-24)
 
 ### Features

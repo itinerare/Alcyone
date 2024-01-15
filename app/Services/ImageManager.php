@@ -89,7 +89,7 @@ class ImageManager extends Service {
     /**
      * Converts an image upload.
      *
-     * @param \App\Models\ImageUpload $image
+     * @param ImageUpload $image
      *
      * @return bool
      */
@@ -141,9 +141,9 @@ class ImageManager extends Service {
     /**
      * Deletes an uploaded image.
      *
-     * @param \App\Models\ImageUpload $image
-     * @param \App\Models\User\User   $user
-     * @param bool                    $reportAction
+     * @param ImageUpload           $image
+     * @param \App\Models\User\User $user
+     * @param bool                  $reportAction
      *
      * @return bool
      */
@@ -192,8 +192,8 @@ class ImageManager extends Service {
     /**
      * Generates and saves test images for page image test purposes.
      *
-     * @param \App\Models\ImageUpload $image
-     * @param bool                    $create
+     * @param ImageUpload $image
+     * @param bool        $create
      *
      * @return bool
      */

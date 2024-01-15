@@ -15,7 +15,7 @@ class ReportCancelled extends Mailable {
     /**
      * The report instance.
      *
-     * @var \App\Models\Report\Report
+     * @var Report
      */
     public $report;
 
@@ -39,7 +39,7 @@ class ReportCancelled extends Mailable {
     /**
      * Get the message content definition.
      *
-     * @return \Illuminate\Mail\Mailables\Content
+     * @return Content
      */
     public function content() {
         return new Content(

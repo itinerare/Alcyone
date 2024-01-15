@@ -52,7 +52,7 @@ class ReportFactory extends Factory {
      *
      * @param int $image
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function image($image) {
         return $this->state(function (array $attributes) use ($image) {
@@ -67,7 +67,7 @@ class ReportFactory extends Factory {
      *
      * @param string $status
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function status($status) {
         return $this->state(function (array $attributes) use ($status) {

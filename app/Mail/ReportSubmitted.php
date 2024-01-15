@@ -15,7 +15,7 @@ class ReportSubmitted extends Mailable {
     /**
      * The report instance.
      *
-     * @var \App\Models\Report\Report
+     * @var Report
      */
     public $report;
 

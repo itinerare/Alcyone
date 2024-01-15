@@ -52,7 +52,7 @@ class UserFactory extends Factory {
     /**
      * Generate a user with a safe username.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function safeUsername() {
         return $this->state(function (array $attributes) {
@@ -65,7 +65,7 @@ class UserFactory extends Factory {
     /**
      * Generate a user with a simple, known password.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function simplePass() {
         return $this->state(function (array $attributes) {
@@ -78,7 +78,7 @@ class UserFactory extends Factory {
     /**
      * Indicate that the user is banned.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function banned() {
         return $this->state(function (array $attributes) {
@@ -93,7 +93,7 @@ class UserFactory extends Factory {
     /**
      * Indicate that the user is a moderator.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function moderator() {
         return $this->state(function (array $attributes) {
@@ -106,7 +106,7 @@ class UserFactory extends Factory {
     /**
      * Indicate that the user is an admin.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function admin() {
         return $this->state(function (array $attributes) {

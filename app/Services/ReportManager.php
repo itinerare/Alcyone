@@ -91,9 +91,9 @@ class ReportManager extends Service {
     /**
      * Accepts a report.
      *
-     * @param \App\Models\Report\Report $report
-     * @param array                     $data
-     * @param \App\Models\User\User     $user
+     * @param Report $report
+     * @param array  $data
+     * @param User   $user
      *
      * @return bool
      */
@@ -133,9 +133,9 @@ class ReportManager extends Service {
     /**
      * Cancels a report.
      *
-     * @param \App\Models\Report\Report $report
-     * @param array                     $data
-     * @param \App\Models\User\User     $user
+     * @param Report $report
+     * @param array  $data
+     * @param User   $user
      *
      * @return bool
      */
@@ -170,9 +170,9 @@ class ReportManager extends Service {
     /**
      * Bans a reporter.
      *
-     * @param \App\Models\Report\Report $report
-     * @param array                     $data
-     * @param \App\Models\User\User     $user
+     * @param Report $report
+     * @param array  $data
+     * @param User   $user
      *
      * @return bool
      */

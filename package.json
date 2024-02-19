@@ -17,7 +17,7 @@
         "lodash": "^4.17.19",
         "magnific-popup": "^1.1.0",
         "postcss": "^8.4.35",
-        "sass": "^1.70.0"
+        "sass": "^1.71.0"
     },
     "version": "1.5.1",
     "dependencies": {

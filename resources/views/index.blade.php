@@ -20,7 +20,7 @@
 
                     <div class="p-2">
                         {{ html()->label('Upload File', 'mainImage')->class('form-label') }}
-                        {{ html()->file('image')->id('mainImage')->class('form-control') }}
+                        {{ html()->file('image')->id('mainImage')->class('form-control')->acceptImage(true) }}
                         <small>Images may be PNG, JPEG, or WebP and up to
                             {{ min((int) ini_get('upload_max_filesize'), (int) ini_get('post_max_size'), '17') }}MB in size, or GIF and up to {{ min((int) ini_get('upload_max_filesize'), (int) ini_get('post_max_size'), '8') }}MB in size.</small>
                     </div>

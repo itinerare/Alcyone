@@ -10,31 +10,26 @@
     <p>Click on a user's name to view/edit their information.</p>
 
     <div>
-        {!! Form::open(['method' => 'GET', 'class' => 'd-flex justify-content-end']) !!}
-        <div class="me-2 mb-3">
-            {!! Form::text('name', Request::get('name'), ['class' => 'form-control']) !!}
-        </div>
-        <div class="me-2 mb-3">
-            {!! Form::select('rank_id', $ranks, Request::get('rank_id'), ['class' => 'form-select']) !!}
-        </div>
-        <div class="me-2 mb-3">
-            {!! Form::select(
-                'sort',
-                [
+        {{ html()->form('GET')->class('d-flex justify-content-end')->open() }}
+            <div class="me-2 mb-3">
+                {{ html()->text('name', request()->get('name'))->class('form-control') }}
+            </div>
+            <div class="me-2 mb-3">
+                {{ html()->select('rank_id', $ranks, request()->get('rank_id'))->class('form-select') }}
+            </div>
+            <div class="me-2 mb-3">
+                {{ html()->select('sort', [
                     'alpha' => 'Sort Alphabetically (A-Z)',
                     'alpha-reverse' => 'Sort Alphabetically (Z-A)',
                     'rank' => 'Sort by Rank (Default)',
                     'newest' => 'Newest First',
                     'oldest' => 'Oldest First',
-                ],
-                Request::get('sort') ?: 'category',
-                ['class' => 'form-select'],
-            ) !!}
-        </div>
-        <div class="mb-3">
-            {!! Form::submit('Search', ['class' => 'btn btn-primary']) !!}
-        </div>
-        {!! Form::close() !!}
+                ], request()->get('sort') ?? 'category')->class('form-select') }}
+            </div>
+            <div class="mb-3">
+                {{ html()->submit('Submit')->class('btn btn-primary') }}
+            </div>
+        {{ html()->form()->close() }}
     </div>
 
     {!! $users->render() !!}

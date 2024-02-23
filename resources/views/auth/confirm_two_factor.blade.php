@@ -28,13 +28,13 @@
         </div>
     </div>
 
-    {!! Form::open(['url' => 'account/two-factor/confirm']) !!}
+    {{ html()->form()->open() }}
     <div class="mb-3">
-        {!! Form::label('Confirm 2FA') !!}
-        {!! Form::text('code', null, ['class' => 'form-control']) !!}
+        {{ html()->label('Confirm 2FA', 'code')->class('form-label') }}
+        {{ html()->text('code')->class('form-control') }}
     </div>
     <div class="text-end">
-        {!! Form::submit('Confirm', ['class' => 'btn btn-primary']) !!}
+        {{ html()->submit('Confirm')->class('btn btn-primary') }}
     </div>
-    {!! Form::close() !!}
+    {{ html()->form()->close() }}
 @endsection

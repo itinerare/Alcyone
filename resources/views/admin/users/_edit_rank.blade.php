@@ -1,21 +1,21 @@
 @if ($rank)
-    {!! Form::open(['url' => 'admin/ranks/edit/' . $rank->id]) !!}
+    {{ html()->modelForm($rank)->open() }}
 
     <div class="mb-3">
-        {!! Form::label('Rank Name') !!}
-        {!! Form::text('name', $rank->name, ['class' => 'form-control']) !!}
+        {{ html()->label('Rank Name', 'name')->class('form-label') }}
+        {{ html()->text('name',)->class('form-control') }}
     </div>
 
     <div class="mb-3">
-        {!! Form::label('Description (optional)') !!}
-        {!! Form::textarea('description', $rank->description, ['class' => 'form-control']) !!}
+        {{ html()->label('Description (Optional)', 'description')->class('form-label') }}
+        {{ html()->textarea('description')->class('form-control') }}
     </div>
 
     <div class="text-end">
-        {!! Form::submit($rank->id ? 'Edit' : 'Create', ['class' => 'btn btn-primary']) !!}
+        {{ html()->submit($rank->id ? 'Edit' : 'Create')->class('btn btn-primary') }}
     </div>
 
-    {!! Form::close() !!}
+    {{ html()->closeModelForm() }}
 @else
     Invalid rank selected.
 @endif

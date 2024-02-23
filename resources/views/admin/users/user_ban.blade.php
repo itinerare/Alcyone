@@ -24,20 +24,17 @@
     </ul>
 
     <h3>{{ $user->is_banned ? 'Edit ' : '' }}Ban</h3>
-    <p>Banning the user will prevent them from using site features. Note that if the site is private, this includes reading
-        the site.</p>
+    <p>Banning the user will prevent them from using site features.</p>
 
-    {!! Form::open(['url' => 'admin/users/' . $user->name . '/ban', 'id' => 'banForm']) !!}
-    <div class="mb-3">
-        {!! Form::label('Reason (Optional; no HTML)') !!}
-        {!! Form::textarea('ban_reason', $user->ban_reason, ['class' => 'form-control']) !!}
-    </div>
-    <div class="text-end">
-        {!! Form::submit($user->is_banned ? 'Edit' : 'Ban', [
-            'class' => 'btn btn' . ($user->is_banned ? '' : '-outline') . '-danger ban-button',
-        ]) !!}
-    </div>
-    {!! Form::close() !!}
+    {{ html()->modelForm($user)->id('banForm')->open() }}
+        <div class="mb-3">
+            {{ html()->label('Reason (Optional; no HTML)', 'ban_reason') }}
+            {{ html()->textarea('ban_reason')->class('form-control') }}
+        </div>
+        <div class="text-end">
+            {{ html()->submit($user->is_banned ? 'Edit' : 'Ban')->class('btn btn' . ($user->is_banned ? '' : '-outline') . '-danger ban-button') }}
+        </div>
+    {{ html()->form()->close() }}
 
     @if ($user->is_banned)
         <h3>Unban</h3>

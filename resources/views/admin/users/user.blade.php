@@ -23,50 +23,39 @@
     </ul>
 
     <h3>Basic Info</h3>
-    {!! Form::open(['url' => 'admin/users/' . $user->name . '/basic']) !!}
+    {{ html()->modelForm($user, 'POST', 'basic')->class('mb-4')->open() }}
+        <div class="mb-3 row">
+            {{ html()->label('Username', 'name')->class('col-md-2 col-form-label') }}
+            <div class="col-md-10">
+                {{ html()->text('name')->class('form-control') }}
+            </div>
+        </div>
+        <div class="mb-3 row">
+            {{ html()->label('Rank '.($user->isAdmin ? add_help('The rank of the admin user cannot be edited.') : ''), 'rank_id')->class('col-md-2 col-form-label') }}
+            <div class="col-md-10">
+                {{ html()->select('rank_id', $ranks)->class('form-select')->disabled($user->isAdmin) }}
+            </div>
+        </div>
+        <div class="text-end">
+            {{ html()->submit('Edit')->class('btn btn-primary') }}
+        </div>
+    {{ html()->closeModelForm() }}
+
+    {{ html()->modelForm($user, 'POST', 'account')->open() }}
     <div class="mb-3 row">
-        <label class="col-md-2 col-form-label">Username</label>
+        {{ html()->label('Email Address', 'email')->class('col-md-2 col-form-label') }}
         <div class="col-md-10">
-            {!! Form::text('name', $user->name, ['class' => 'form-control']) !!}
+            {{ html()->text('email')->class('form-control')->disabled() }}
         </div>
     </div>
     <div class="mb-3 row">
-        <label class="col-md-2 col-form-label">Rank
-            @if ($user->isAdmin)
-                {!! add_help('The rank of the admin user cannot be edited.') !!}
-            @endif
-        </label>
+        {{ html()->label('Join Date', 'created_at')->class('col-md-2 col-form-label') }}
         <div class="col-md-10">
-            @if (!$user->isAdmin)
-                {!! Form::select('rank_id', $ranks, $user->rank_id, ['class' => 'form-control']) !!}
-            @else
-                {!! Form::text('rank_id', $ranks[$user->rank_id], ['class' => 'form-control', 'disabled']) !!}
-            @endif
+            {{ html()->text('created_at', format_date($user->created_at, false))->class('form-control')->disabled() }}
         </div>
     </div>
     <div class="text-end">
-        {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+        {{ html()->submit('Edit')->class('btn btn-primary') }}
     </div>
-    {!! Form::close() !!}
-
-    <h3>Account</h3>
-
-    {!! Form::open(['url' => 'admin/users/' . $user->name . '/account']) !!}
-    <div class="mb-3 row">
-        <label class="col-md-2 col-form-label">Email Address</label>
-        <div class="col-md-10">
-            {!! Form::text('email', $user->email, ['class' => 'form-control', 'disabled']) !!}
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-md-2 col-form-label">Join Date</label>
-        <div class="col-md-10">
-            {!! Form::text('created_at', format_date($user->created_at, false), ['class' => 'form-control', 'disabled']) !!}
-        </div>
-    </div>
-    <div class="text-end">
-        {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
-    </div>
-    {!! Form::close() !!}
-
+    {{ html()->closeModelForm() }}
 @endsection

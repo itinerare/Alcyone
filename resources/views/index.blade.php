@@ -10,7 +10,7 @@
             <div class="card bg-body-secondary mb-4">
                 <div class="card-body">
                     <h5>Upload an Image</h5>
-                    {!! Form::open(['url' => 'images/upload', 'id' => 'imageForm', 'files' => true]) !!}
+                    {{ html()->form('POST', 'images/upload')->id('imageForm')->acceptsFiles(true)->open() }}
 
                     <div class="card bg-body-tertiary mb-2 d-none" id="imageContainer">
                         <div class="card-body text-center">
@@ -19,16 +19,16 @@
                     </div>
 
                     <div class="p-2">
-                        {!! Form::label('mainImage', 'Upload File', ['class' => 'form-label']) !!}
-                        {!! Form::file('image', ['id' => 'mainImage', 'class' => 'form-control']) !!}
+                        {{ html()->label('Upload File', 'mainImage')->class('form-label') }}
+                        {{ html()->file('image')->id('mainImage')->class('form-control') }}
                         <small>Images may be PNG, JPEG, or WebP and up to
                             {{ min((int) ini_get('upload_max_filesize'), (int) ini_get('post_max_size'), '17') }}MB in size, or GIF and up to {{ min((int) ini_get('upload_max_filesize'), (int) ini_get('post_max_size'), '8') }}MB in size.</small>
                     </div>
 
                     <div class="text-end">
-                        {!! Form::submit('Upload', ['class' => 'btn btn-primary']) !!}
+                        {{ html()->submit('Upload')->class('btn btn-primary') }}
                     </div>
-                    {!! Form::close() !!}
+                    {{ html()->form()->close() }}
                 </div>
             </div>
         </div>

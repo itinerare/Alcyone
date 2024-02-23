@@ -11,9 +11,7 @@
                 <h1>Register</h1>
             </div>
         </div>
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
+        {{ html()->form()->open() }}
             <div class="mb-3 row">
                 <label for="name" class="col-md-4 col-form-label text-md-end">Username</label>
 
@@ -81,24 +79,17 @@
 
             <div class="mb-3 row">
                 <div class="col-md-6 offset-md-4">
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            {!! Form::checkbox('agreement', 1, false, ['class' => 'form-check-input']) !!}
-                            I have read and agree to the <a href="{{ url('info/terms') }}">Terms of Service</a> and
-                            <a href="{{ url('info/privacy') }}">Privacy Policy</a>.
-                        </label>
-                    </div>
+                    {{ html()->checkbox('agreement', false)->class('form-check-input') }}
+                    {{ html()->label('I have read and agree to the <a href="'.url('info/terms').'">Terms of Service</a> and <a href="'.url('info/privacy').'">Privacy Policy</a>.')->class('form-check-label') }}
                 </div>
             </div>
 
             <div class="mb-3 row mb-0">
                 <div class="col-md-6 offset-md-4">
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('Register') }}
-                    </button>
+                    {{ html()->submit(__('Register'))->class('btn btn-primary') }}
                 </div>
             </div>
-        </form>
+        {{ html()->form()->close() }}
     @else
         @include('auth._require_setup')
     @endif

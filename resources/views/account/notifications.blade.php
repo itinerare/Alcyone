@@ -10,9 +10,9 @@
     <h1>Notifications</h1>
 
     <div class="text-end mb-3">
-        {!! Form::open(['url' => 'notifications/clear']) !!}
-        {!! Form::submit('Clear All', ['class' => 'btn btn-primary']) !!}
-        {!! Form::close() !!}
+        {{ html()->form('POST', 'notifications/clear')->open() }}
+        {{ html()->submit('Clear All')->class('btn btn-primary') }}
+        {{ html()->form()->close() }}
     </div>
     {!! $notifications->render() !!}
 
@@ -21,12 +21,12 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <span class="float-end h5 mb-2">
-                        {!! Form::open(['url' => 'notifications/clear/' . $type]) !!}
+                        {{ html()->form('POST', 'notifications/clear/'.$type)->open() }}
                         <span class="badge badge-primary">
                             {{ $notifications->where('notification_type_id', $type)->count() }}
                         </span>
-                        {!! Form::submit('x clear', ['class' => 'badge btn-primary', 'style' => 'display:inline; border: 0;']) !!}
-                        {!! Form::close() !!}
+                        {{ html()->submit('x clear')->class('badge btn-primary d-inline border-0') }}
+                        {{ html()->form()->close() }}
                     </span>
                     <a class="card-title h5 collapse-title mb-2" href="#{{ str_replace(' ', '_', config('alcyone.notifications.' . $type . '.name')) }}" data-bs-toggle="collapse">{{ config('alcyone.notifications.' . $type . '.name') }}
                     </a>

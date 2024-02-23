@@ -13,17 +13,17 @@
         <div class="card-body">
             <h3>Theme</h3>
 
-            {!! Form::open(['url' => 'account/theme']) !!}
+            {{ html()->modelForm(Auth::user(), 'POST', 'theme')->open() }}
             <div class="mb-3 row">
-                <label class="col-md-2 col-form-label">Theme</label>
+                {{ html()->label('Theme', 'theme')->class('col-md-2 col-form-label') }}
                 <div class="col-md-10">
-                    {!! Form::select('theme', ['dark' => 'Dark', 'light' => 'Light'], Auth::user()->theme, ['class' => 'form-select']) !!}
+                    {{ html()->select('theme', ['dark' => 'Dark', 'light' => 'Light'])->class('form-select') }}
                 </div>
             </div>
             <div class="text-end">
-                {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+                {{ html()->submit('Edit')->class('btn btn-primary') }}
             </div>
-            {!! Form::close() !!}
+            {{ html()->closeModelForm() }}
         </div>
     </div>
 
@@ -31,34 +31,32 @@
         <div class="card-body">
             <h3>Email Address</h3>
 
-            {!! Form::open(['url' => 'account/email']) !!}
+            {{ html()->modelForm(Auth::user(), 'POST', 'email')->open() }}
             <div class="mb-3 row">
-                <label class="col-md-2 col-form-label">Email Address</label>
+                {{ html()->label('Email Address', 'email')->class('col-md-2 col-form-label') }}
                 <div class="col-md-10">
-                    {!! Form::text('email', Auth::user()->email, ['class' => 'form-control']) !!}
+                    {{ html()->text('email')->class('form-control') }}
                 </div>
             </div>
             <div class="text-end">
-                {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+                {{ html()->submit('Edit')->class('btn btn-primary') }}
             </div>
-            {!! Form::close() !!}
+            {{ html()->closeModelForm() }}
 
             @if (Auth::user()->isMod)
                 <h3>Admin Notifications</h3>
 
-                {!! Form::open(['url' => 'account/admin-notifs']) !!}
+                {{ html()->modelForm(Auth::user(), 'POST', 'admin-notifs')->open() }}
                 <div class="mb-3 row">
-                    <label class="col-md-2 col-form-label">
-                        Receive Admin Notifications {!! add_help('Whether or not you would like to receive an email notification when a new report is submitted.') !!}
-                    </label>
+                    {{ html()->label('Receive Admin Notifications '.add_help('Whether or not you would like to receive an email notification when a new report is submitted.'), 'receive_admin_notifs')->class('col-md-2 col-form-label') }}
                     <div class="col-md-10">
-                        {!! Form::checkbox('receive_admin_notifs', 1, Auth::user()->receive_admin_notifs, ['class' => 'form-check mt-3']) !!}
+                        {{ html()->checkbox('receive_admin_notifs')->class('form-check mt-3') }}
                     </div>
                 </div>
                 <div class="text-end">
-                    {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+                    {{ html()->submit('Edit')->class('btn btn-primary') }}
                 </div>
-                {!! Form::close() !!}
+                {{ html()->closeModelForm() }}
             @endif
         </div>
     </div>
@@ -67,29 +65,29 @@
         <div class="card-body">
             <h3>Change Password</h3>
 
-            {!! Form::open(['url' => 'account/password']) !!}
+            {{ html()->form('POST', 'password')->open() }}
             <div class="mb-3 row">
-                <label class="col-md-2 col-form-label">Old Password</label>
+                {{ html()->label('Old Password', 'old_password')->class('col-md-2 col-form-label') }}
                 <div class="col-md-10">
-                    {!! Form::password('old_password', ['class' => 'form-control']) !!}
+                    {{ html()->password('old_password')->class('form-control') }}
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-md-2 col-form-label">New Password</label>
+                {{ html()->label('New Password', 'new_password')->class('col-md-2 col-form-label') }}
                 <div class="col-md-10">
-                    {!! Form::password('new_password', ['class' => 'form-control']) !!}
+                    {{ html()->password('new_password')->class('form-control') }}
                 </div>
             </div>
             <div class="mb-3 row">
-                <label class="col-md-2 col-form-label">Confirm New Password</label>
+                {{ html()->label('Confirm New Password', 'new_password_confirmation')->class('col-md-2 col-form-label') }}
                 <div class="col-md-10">
-                    {!! Form::password('new_password_confirmation', ['class' => 'form-control']) !!}
+                    {{ html()->password('new_password_confirmation')->class('form-control') }}
                 </div>
             </div>
             <div class="text-end">
-                {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+                {{ html()->submit('Edit')->class('btn btn-primary') }}
             </div>
-            {!! Form::close() !!}
+            {{ html()->form()->close() }}
         </div>
     </div>
 
@@ -105,27 +103,27 @@
                 <p>In order to enable two-factor authentication, you will need to scan a QR code with an authenticator app
                     on your phone. Two-factor authentication will not be enabled until you do so and confirm by entering one
                     of the codes provided by your authentication app.</p>
-                {!! Form::open(['url' => 'account/two-factor/enable']) !!}
-                <div class="text-end">
-                    {!! Form::submit('Enable', ['class' => 'btn btn-primary']) !!}
-                </div>
-                {!! Form::close() !!}
+                {{ html()->form('POST', 'two-factor/enable')->open() }}
+                    <div class="text-end">
+                        {{ html()->submit('Submit')->class('btn btn-primary') }}
+                    </div>
+                {{ html()->form()->close() }}
             @elseif(isset(Auth::user()->two_factor_secret))
                 <p>Two-factor authentication is currently enabled.</p>
 
                 <h4>Disable Two-Factor Authentication</h4>
                 <p>To disable two-factor authentication, you must enter a code from your authenticator app.</p>
-                {!! Form::open(['url' => 'account/two-factor/disable']) !!}
+                {{ html()->form('POST', 'two-factor/disable')->open() }}
                 <div class="mb-3 row">
-                    <label class="col-md-2 col-form-label">Code</label>
+                    {{ html()->label('Code', 'code')->class('col-md-2 col-form-label') }}
                     <div class="col-md-10">
-                        {!! Form::text('code', null, ['class' => 'form-control']) !!}
+                        {{ html()->text('code')->class('form-control') }}
                     </div>
                 </div>
                 <div class="text-end">
-                    {!! Form::submit('Disable', ['class' => 'btn btn-primary']) !!}
+                    {{ html()->submit('Submit')->class('btn btn-primary') }}
                 </div>
-                {!! Form::close() !!}
+                {{ html()->form()->close() }}
             @endif
         </div>
     </div>

@@ -20,7 +20,7 @@
                 <hr />
                 Uploaded {!! $image->created_at->format('d F Y') !!}
                 <div id="deleteImage" class="d-none mt-3">
-                    {{ html()->form('POST', 'images/delete/'.$image->slug)->open() }}
+                    {{ html()->form('POST', 'images/delete/' . $image->slug)->open() }}
 
                     You are about to delete this image. This is not reversible.<br />
                     Are you sure you want to delete this image?

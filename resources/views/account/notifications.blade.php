@@ -21,7 +21,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <span class="float-end h5 mb-2">
-                        {{ html()->form('POST', 'notifications/clear/'.$type)->open() }}
+                        {{ html()->form('POST', 'notifications/clear/' . $type)->open() }}
                         <span class="badge badge-primary">
                             {{ $notifications->where('notification_type_id', $type)->count() }}
                         </span>

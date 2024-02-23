@@ -27,13 +27,13 @@
     <p>Banning the user will prevent them from using site features.</p>
 
     {{ html()->modelForm($user)->id('banForm')->open() }}
-        <div class="mb-3">
-            {{ html()->label('Reason (Optional; no HTML)', 'ban_reason') }}
-            {{ html()->textarea('ban_reason')->class('form-control') }}
-        </div>
-        <div class="text-end">
-            {{ html()->submit($user->is_banned ? 'Edit' : 'Ban')->class('btn btn' . ($user->is_banned ? '' : '-outline') . '-danger ban-button') }}
-        </div>
+    <div class="mb-3">
+        {{ html()->label('Reason (Optional; no HTML)', 'ban_reason') }}
+        {{ html()->textarea('ban_reason')->class('form-control') }}
+    </div>
+    <div class="text-end">
+        {{ html()->submit($user->is_banned ? 'Edit' : 'Ban')->class('btn btn' . ($user->is_banned ? '' : '-outline') . '-danger ban-button') }}
+    </div>
     {{ html()->form()->close() }}
 
     @if ($user->is_banned)

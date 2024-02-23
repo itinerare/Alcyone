@@ -24,21 +24,21 @@
 
     <h3>Basic Info</h3>
     {{ html()->modelForm($user, 'POST', 'basic')->class('mb-4')->open() }}
-        <div class="mb-3 row">
-            {{ html()->label('Username', 'name')->class('col-md-2 col-form-label') }}
-            <div class="col-md-10">
-                {{ html()->text('name')->class('form-control') }}
-            </div>
+    <div class="mb-3 row">
+        {{ html()->label('Username', 'name')->class('col-md-2 col-form-label') }}
+        <div class="col-md-10">
+            {{ html()->text('name')->class('form-control') }}
         </div>
-        <div class="mb-3 row">
-            {{ html()->label('Rank '.($user->isAdmin ? add_help('The rank of the admin user cannot be edited.') : ''), 'rank_id')->class('col-md-2 col-form-label') }}
-            <div class="col-md-10">
-                {{ html()->select('rank_id', $ranks)->class('form-select')->disabled($user->isAdmin) }}
-            </div>
+    </div>
+    <div class="mb-3 row">
+        {{ html()->label('Rank ' . ($user->isAdmin ? add_help('The rank of the admin user cannot be edited.') : ''), 'rank_id')->class('col-md-2 col-form-label') }}
+        <div class="col-md-10">
+            {{ html()->select('rank_id', $ranks)->class('form-select')->disabled($user->isAdmin) }}
         </div>
-        <div class="text-end">
-            {{ html()->submit('Edit')->class('btn btn-primary') }}
-        </div>
+    </div>
+    <div class="text-end">
+        {{ html()->submit('Edit')->class('btn btn-primary') }}
+    </div>
     {{ html()->closeModelForm() }}
 
     {{ html()->modelForm($user, 'POST', 'account')->open() }}

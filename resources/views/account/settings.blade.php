@@ -48,7 +48,7 @@
 
                 {{ html()->modelForm(Auth::user(), 'POST', 'admin-notifs')->open() }}
                 <div class="mb-3 row">
-                    {{ html()->label('Receive Admin Notifications '.add_help('Whether or not you would like to receive an email notification when a new report is submitted.'), 'receive_admin_notifs')->class('col-md-2 col-form-label') }}
+                    {{ html()->label('Receive Admin Notifications ' . add_help('Whether or not you would like to receive an email notification when a new report is submitted.'), 'receive_admin_notifs')->class('col-md-2 col-form-label') }}
                     <div class="col-md-10">
                         {{ html()->checkbox('receive_admin_notifs')->class('form-check mt-3') }}
                     </div>
@@ -104,9 +104,9 @@
                     on your phone. Two-factor authentication will not be enabled until you do so and confirm by entering one
                     of the codes provided by your authentication app.</p>
                 {{ html()->form('POST', 'two-factor/enable')->open() }}
-                    <div class="text-end">
-                        {{ html()->submit('Submit')->class('btn btn-primary') }}
-                    </div>
+                <div class="text-end">
+                    {{ html()->submit('Submit')->class('btn btn-primary') }}
+                </div>
                 {{ html()->form()->close() }}
             @elseif(isset(Auth::user()->two_factor_secret))
                 <p>Two-factor authentication is currently enabled.</p>

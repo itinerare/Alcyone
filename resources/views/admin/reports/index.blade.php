@@ -22,12 +22,12 @@
     </ul>
 
     {{ html()->form('GET')->class('d-flex justify-content-end')->open() }}
-        <div class="mb-3">
-            {{ html()->select('sort', ['newest' => 'Newest First', 'oldest' => 'Oldest First'], Request::get('sort') ?? 'oldest')->class('form-select') }}
-        </div>
-        <div class="ms-2 mb-3">
-            {{ html()->submit('Submit')->class('btn btn-primary') }}
-        </div>
+    <div class="mb-3">
+        {{ html()->select('sort', ['newest' => 'Newest First', 'oldest' => 'Oldest First'], Request::get('sort') ?? 'oldest')->class('form-select') }}
+    </div>
+    <div class="ms-2 mb-3">
+        {{ html()->submit('Submit')->class('btn btn-primary') }}
+    </div>
     {{ html()->form()->close() }}
 
     {!! $reports->render() !!}

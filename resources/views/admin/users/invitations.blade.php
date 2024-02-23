@@ -13,7 +13,7 @@
         generated with the key. Generated invitations can be deleted only if they have not been used.</p>
 
     {{ html()->form('POST', 'invitations/create')->class('text-end mb-3')->open() }}
-        {{ html()->submit('Generate New Invitation')->class('btn btn-primary') }}
+    {{ html()->submit('Generate New Invitation')->class('btn btn-primary') }}
     {{ html()->form()->close() }}
 
     @if (!count($invitations))
@@ -49,8 +49,8 @@
                     <div class="col-6 col-md-3">{!! pretty_date($invitation->created_at, false) !!}</div>
                     <div class="col-6 col-md-1">
                         @if (!$invitation->recipient_id)
-                            {{ html()->form('POST', 'invitations/delete/'.$invitation->id)->open() }}
-                                {{ html()->submit('Delete')->class('btn btn-danger btn-sm py-0') }}
+                            {{ html()->form('POST', 'invitations/delete/' . $invitation->id)->open() }}
+                            {{ html()->submit('Delete')->class('btn btn-danger btn-sm py-0') }}
                             {{ html()->form()->close() }}
                         @endif
                     </div>

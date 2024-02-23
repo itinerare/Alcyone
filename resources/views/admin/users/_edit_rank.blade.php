@@ -3,7 +3,7 @@
 
     <div class="mb-3">
         {{ html()->label('Rank Name', 'name')->class('form-label') }}
-        {{ html()->text('name',)->class('form-control') }}
+        {{ html()->text('name')->class('form-control') }}
     </div>
 
     <div class="mb-3">

@@ -31,7 +31,7 @@ Alcyone is a lightweight small-scale/private image hosting application. It suppo
 ### Obtain a copy of the code
 
 ```
-$ git clone https://github.com/itinerare/alcyone.git
+$ git clone https://code.itinerare.net/itinerare/alcyone.git
 ```
 
 ### Configure .env in the directory

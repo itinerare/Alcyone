@@ -117,7 +117,7 @@ class AccountController extends Controller {
      */
     public function postAdminNotifs(Request $request) {
         $request->validate([
-            'receive_admin_notifs' => 'required|boolean',
+            'receive_admin_notifs' => 'nullable|boolean',
         ]);
 
         if (!Auth::user()->isMod) {
@@ -128,7 +128,7 @@ class AccountController extends Controller {
         }
 
         Auth::user()->update([
-            'receive_admin_notifs' => $request->get('receive_admin_notifs'),
+            'receive_admin_notifs' => $request->get('receive_admin_notifs') ?? 0,
         ]);
         flash('Admin notification preference updated successfully.')->success();
 

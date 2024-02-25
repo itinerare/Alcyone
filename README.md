@@ -31,7 +31,7 @@ Alcyone is a lightweight small-scale/private image hosting application. It suppo
 ### Obtain a copy of the code
 
 ```
-$ git clone https://github.com/itinerare/alcyone.git
+$ git clone https://code.itinerare.net/itinerare/alcyone.git
 ```
 
 ### Configure .env in the directory
@@ -60,7 +60,7 @@ Perform general site setup:
 $ php artisan setup-alcyone
 ```
 
-Add feeds to `config/alcyone/settings.php` per the instructions in that file. Optionally, configure your time zone in `config/app.php` (see [here](https://www.php.net/manual/en/timezones.php) for a list of PHP-supported time zones).
+Optionally, configure your time zone in `config/app.php` (see [here](https://www.php.net/manual/en/timezones.php) for a list of PHP-supported time zones).
 
 Ensure that the scheduler is added to cron, like so:
 ```

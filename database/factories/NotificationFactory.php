@@ -23,7 +23,7 @@ class NotificationFactory extends Factory {
      *
      * @param int $user
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function user($user) {
         return $this->state(function (array $attributes) use ($user) {
@@ -38,7 +38,7 @@ class NotificationFactory extends Factory {
      *
      * @param \App\Models\ImageUpload|null $image
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function uploadRemoved($image = null) {
         return $this->state(function (array $attributes) use ($image) {

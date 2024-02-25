@@ -25,7 +25,7 @@ class UserService extends Service {
      *
      * @param array $data
      *
-     * @return \App\Models\User\User
+     * @return User
      */
     public function createUser($data) {
         // If the rank is not given, create a user with the lowest existing rank.
@@ -48,7 +48,7 @@ class UserService extends Service {
      *
      * @param array $data
      *
-     * @return \App\Models\User\User
+     * @return User
      */
     public function updateUser($data) {
         $user = User::find($data['id']);
@@ -73,8 +73,8 @@ class UserService extends Service {
     /**
      * Updates the user's password.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
+     * @param array $data
+     * @param User  $user
      *
      * @return bool
      */
@@ -103,8 +103,8 @@ class UserService extends Service {
     /**
      * Updates the user's email and resends a verification email.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
+     * @param array $data
+     * @param User  $user
      *
      * @return bool
      */
@@ -180,9 +180,9 @@ class UserService extends Service {
     /**
      * Bans a user.
      *
-     * @param array                 $data
-     * @param \App\Models\User\User $user
-     * @param \App\Models\User\User $staff
+     * @param array $data
+     * @param User  $user
+     * @param User  $staff
      *
      * @return bool
      */
@@ -217,8 +217,8 @@ class UserService extends Service {
     /**
      * Unbans a user.
      *
-     * @param \App\Models\User\User $user
-     * @param \App\Models\User\User $staff
+     * @param User $user
+     * @param User $staff
      *
      * @return bool
      */

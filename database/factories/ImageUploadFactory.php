@@ -26,7 +26,7 @@ class ImageUploadFactory extends Factory {
      *
      * @param int $user
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function user($user) {
         return $this->state(function (array $attributes) use ($user) {

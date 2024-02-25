@@ -21,11 +21,11 @@
     @include('reports._report_info', ['isAdmin' => true])
 
     @if ($report->status == 'Pending')
-        {!! Form::open(['url' => url()->current(), 'id' => 'reportForm']) !!}
+        {{ html()->modelForm($report)->id('reportForm')->open() }}
 
         <div class="mb-3">
-            {!! Form::label('staff_comments', 'Staff Comments', ['class' => 'form-label']) !!}
-            {!! Form::textarea('staff_comments', $report->staff_comments, ['class' => 'form-control']) !!}
+            {{ html()->label('Staff Comments', 'staff_comments')->class('form-label') }}
+            {{ html()->textarea('staff_comments')->class('form-control') }}
         </div>
 
         <div class="text-end">
@@ -33,7 +33,7 @@
             <a href="#" class="btn btn-info me-2" data-bs-toggle="modal" data-bs-target="#confirmationModal" data-bs-action="cancel">Cancel Report</a>
             <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#confirmationModal" data-bs-action="accept">Delete Image</a>
         </div>
-        {!! Form::close() !!}
+        {{ html()->closeModelForm() }}
     @else
         <p>
             This report has already been processed.

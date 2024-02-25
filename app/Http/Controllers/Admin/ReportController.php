@@ -96,8 +96,8 @@ class ReportController extends Controller {
     /**
      * Accepts a report, deleting the reported image.
      *
-     * @param \App\Models\Report\Report $report
-     * @param array                     $data
+     * @param Report $report
+     * @param array  $data
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -116,8 +116,8 @@ class ReportController extends Controller {
     /**
      * Cancels a report.
      *
-     * @param \App\Models\Report\Report $report
-     * @param array                     $data
+     * @param Report $report
+     * @param array  $data
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -136,8 +136,8 @@ class ReportController extends Controller {
     /**
      * Bans a reporter.
      *
-     * @param \App\Models\Report\Report $report
-     * @param array                     $data
+     * @param Report $report
+     * @param array  $data
      *
      * @return \Illuminate\Http\RedirectResponse
      */

@@ -4,6 +4,27 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.6.0](https://code.itinerare.net/itinerare/Alcyone/compare/v1.5.1...v1.6.0) (2024-02-25)
+
+### Features
+
+
+##### Images
+
+* Default to image file selection in upload form ([5abe2c](https://code.itinerare.net/itinerare/Alcyone/commit/5abe2c1b11d1058411fc1fa5c92a5aba10e8545c))
+
+### Bug Fixes
+
+* Improve honeypot spam response handling ([b3bd58](https://code.itinerare.net/itinerare/Alcyone/commit/b3bd5860cdbf776ca8dbd5c9ff12d9607964c12f))
+
+##### Users
+
+* Allow unsetting admin notifs preference ([a2fcd5](https://code.itinerare.net/itinerare/Alcyone/commit/a2fcd5a990439aed869c203733de198a1bce8893))
+* Refine forgot password success message error checking ([bad610](https://code.itinerare.net/itinerare/Alcyone/commit/bad610c19f67a68468ea787477437848d7f367b8))
+
+
+---
+
 ## [1.5.1](https://code.itinerare.net/itinerare/Alcyone/compare/v1.5.0...v1.5.1) (2024-01-14)
 
 ### Bug Fixes

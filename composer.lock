@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa7fd9adb997630553ca4b8a9ce6174a",
+    "content-hash": "3fb1c8d39b5ec1bda3d5bebe027cb8c6",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1473,16 +1473,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "11.x-dev",
+            "version": "v11.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "5ffafe3eb3d3c94e33a8240b905bd85af5c215a8"
+                "reference": "5e2f7cd41a3ca048e2b164d2bfbfc4702993fe38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/5ffafe3eb3d3c94e33a8240b905bd85af5c215a8",
-                "reference": "5ffafe3eb3d3c94e33a8240b905bd85af5c215a8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/5e2f7cd41a3ca048e2b164d2bfbfc4702993fe38",
+                "reference": "5e2f7cd41a3ca048e2b164d2bfbfc4702993fe38",
                 "shasum": ""
             },
             "require": {
@@ -1631,7 +1631,6 @@
                 "symfony/postmark-mailer": "Required to enable support for the Postmark mail transport (^7.0).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^7.0)."
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1675,7 +1674,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-03-15T14:01:52+00:00"
+            "time": "2024-03-14T14:27:59+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -9457,7 +9456,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,

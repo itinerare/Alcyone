@@ -12,7 +12,7 @@
         "intervention/image": "^3.1",
         "laracasts/flash": "^3.2",
         "laravel/fortify": "^1.7",
-        "laravel/framework": "^11.10",
+        "laravel/framework": "^11.0",
         "laravel/helpers": "^1.4",
         "laravel/tinker": "^2.8",
         "spatie/flysystem-dropbox": "^3.0.0",
@@ -86,7 +86,7 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "version": "1.6.0"
 }

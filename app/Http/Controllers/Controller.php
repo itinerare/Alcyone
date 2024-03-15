@@ -10,7 +10,7 @@ abstract class Controller {
      */
     public function __construct() {
         // Flash any errors
-        if(Session::get('errors')) {
+        if (Session::get('errors')) {
             foreach (Session::get('errors')->all() as $message) {
                 flash($message)->error();
             }

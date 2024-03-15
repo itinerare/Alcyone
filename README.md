@@ -40,7 +40,8 @@ $ git clone https://code.itinerare.net/itinerare/alcyone.git
 $ cp .env.example .env
 ```
 
-You will need to provide email information; in a pinch services that allow sending email via SMTP will do.
+- See [here](https://www.php.net/manual/en/timezones.php) for a list of PHP-supported time zones.
+- You will need to provide email information; in a pinch services that allow sending email via SMTP will do.
 
 ### Setting up
 

@@ -153,7 +153,7 @@ abstract class Service {
      * @param bool   $flash
      * @param string $error_msg
      */
-    public function addError($error_msg, $flash = true, $key = 'default') {
+    public function addError($error_msg, $flash = false, $key = 'default') {
         $errors = Session::get('errors', new ViewErrorBag);
 
         if (!$errors instanceof ViewErrorBag) {

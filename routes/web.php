@@ -7,24 +7,13 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RankController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::controller(Controller::class)->prefix('info')->group(function () {
+Route::controller(IndexController::class)->prefix('info')->group(function () {
     Route::get('terms', 'getTerms');
     Route::get('privacy', 'getPrivacyPolicy');
 });
@@ -44,7 +33,7 @@ Route::controller(ReportController::class)->prefix('reports')->group(function ()
 
 /* Routes that require login */
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::controller(Controller::class)->group(function () {
+    Route::controller(IndexController::class)->group(function () {
         Route::get('/', 'getIndex');
     });
 

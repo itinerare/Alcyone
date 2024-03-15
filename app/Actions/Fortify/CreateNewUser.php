@@ -8,6 +8,7 @@ use App\Models\User\User;
 use App\Services\InvitationService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers {
@@ -16,14 +17,20 @@ class CreateNewUser implements CreatesNewUsers {
     /**
      * Validate and create a newly registered user.
      *
-     * @return User
+     * @param array<string, string> $input
      */
-    public function create(array $input) {
+    public function create(array $input): User {
         Validator::make($input, [
-            'name'      => ['required', 'string', 'min:3', 'max:25', 'alpha_dash', 'unique:users'],
-            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name'  => ['required', 'string', 'max:255', 'alpha_dash', Rule::unique(User::class)],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+            'password'  => $this->passwordRules(),
             'agreement' => ['required', 'accepted'],
-            'password'  => ['required', 'string', 'min:8', 'confirmed'],
             'code'      => ['string', function ($attribute, $value, $fail) {
                 $invitation = InvitationCode::where('code', $value)->whereNull('recipient_id')->first();
                 if (!$invitation) {

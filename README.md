@@ -60,8 +60,6 @@ Perform general site setup:
 $ php artisan setup-alcyone
 ```
 
-Optionally, configure your time zone in `config/app.php` (see [here](https://www.php.net/manual/en/timezones.php) for a list of PHP-supported time zones).
-
 Ensure that the scheduler is added to cron, like so:
 ```
 * * * * * cd ~/site-name.com/www && php artisan schedule:run >> /dev/null 2>&1

@@ -1,10 +1,6 @@
 name: Laravel Tests
 
 on:
-  push:
-    branches:
-      - 'main'
-      - 'develop'
   pull_request:
     branches:
       - '**'
@@ -18,7 +14,7 @@ jobs:
   laravel-tests:
     strategy:
       matrix:
-        target: ['8.1', '8.2']
+        target: ['8.2', '8.3']
     uses: itinerare/github-actions/.github/workflows/laravel_tests.yml@main
     with:
       php-version: ${{ matrix.target }}

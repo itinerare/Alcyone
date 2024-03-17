@@ -4,6 +4,15 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [2.0.0](https://code.itinerare.net/itinerare/Alcyone/compare/v1.6.0...v2.0.0) (2024-03-17)
+
+### ⚠ BREAKING CHANGES
+
+* Update to Laravel 11 ([81557d](https://code.itinerare.net/itinerare/Alcyone/commit/81557db83772e40b7abb29717c5a61e0f4cb2279))
+
+
+---
+
 ## [1.6.0](https://code.itinerare.net/itinerare/Alcyone/compare/v1.5.1...v1.6.0) (2024-02-25)
 
 ### Features

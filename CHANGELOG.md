@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [2.0.1](https://code.itinerare.net/itinerare/Alcyone/compare/v2.0.0...v2.0.1) (2024-03-31)
+
+### Bug Fixes
+
+
+##### Images
+
+* Unset cache expiry time when deleting image ([9bf4d2](https://code.itinerare.net/itinerare/Alcyone/commit/9bf4d27e906404eff83e7f05376e55609b884a89))
+
+
+---
+
 ## [2.0.0](https://code.itinerare.net/itinerare/Alcyone/compare/v1.6.0...v2.0.0) (2024-03-17)
 
 ### ⚠ BREAKING CHANGES

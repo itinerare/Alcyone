@@ -167,6 +167,7 @@ class ImageManager extends Service {
             unlink($image->imagePath.'/'.$image->thumbnailFileName);
             if (file_exists($image->convertedPath.'/'.$image->convertedFileName)) {
                 unlink($image->convertedPath.'/'.$image->convertedFileName);
+                $image->update(['cache_expiry' => null]);
             }
 
             // If reports with this image exist, and it is not being deleted due to them,

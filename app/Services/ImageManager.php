@@ -121,7 +121,7 @@ class ImageManager extends Service {
                 }
 
                 $manager->read($image->imagePath.'/'.$image->imageFileName)
-                    ->toPng(90)
+                    ->toPng(false, 90)
                     ->save($image->convertedPath.'/'.$image->convertedFileName);
 
                 // Save the expiry time for the cached image

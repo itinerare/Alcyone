@@ -7267,20 +7267,21 @@
         },
         {
             "name": "marcocesarato/php-conventional-changelog",
-            "version": "1.17.1",
+            "version": "1.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/marcocesarato/php-conventional-changelog.git",
-                "reference": "2dc5c1eee3b011df22d3a797d0083b7ed6e7ea4e"
+                "reference": "2a153727bab28c85d54184975292a468fac269f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marcocesarato/php-conventional-changelog/zipball/2dc5c1eee3b011df22d3a797d0083b7ed6e7ea4e",
-                "reference": "2dc5c1eee3b011df22d3a797d0083b7ed6e7ea4e",
+                "url": "https://api.github.com/repos/marcocesarato/php-conventional-changelog/zipball/2a153727bab28c85d54184975292a468fac269f7",
+                "reference": "2a153727bab28c85d54184975292a468fac269f7",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
+                "ext-mbstring": "*",
                 "php": ">=7.1.3",
                 "symfony/console": "^4 || ^5 || ^6 || ^7"
             },
@@ -7338,9 +7339,9 @@
             ],
             "support": {
                 "issues": "https://github.com/marcocesarato/php-conventional-changelog/issues",
-                "source": "https://github.com/marcocesarato/php-conventional-changelog/tree/v1.17.1"
+                "source": "https://github.com/marcocesarato/php-conventional-changelog/tree/v1.17.2"
             },
-            "time": "2024-03-09T14:43:33+00:00"
+            "time": "2024-05-19T14:35:27+00:00"
         },
         {
             "name": "mockery/mockery",

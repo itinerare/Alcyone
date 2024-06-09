@@ -30,7 +30,7 @@ jobs:
         echo "" >> description.md
         echo "${description}" >> description.md
 
-    - name: Create Release
+    - name: Create/update release
       uses: ncipollo/release-action@v1
       with:
         makeLatest: true

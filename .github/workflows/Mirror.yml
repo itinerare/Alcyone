@@ -1,0 +1,36 @@
+name: Mirror Releases
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0/30 * * * *"
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+    - name: Release Info
+      id: info
+      run: |
+        response=$(curl -s "https://code.itinerare.net/api/v1/repos/itinerare/Alcyone/releases")
+        name=$(echo "$response" | jq -r '.[0].name')
+        tag=$(echo "$response" | jq -r '.[0].tag_name')
+        description=$(echo "$response" | jq -r '.[0].body')
+
+        echo "::set-output name=name::$name"
+        echo "::set-output name=tag::$name"
+
+        echo "${description}" >> description.txt
+
+    - name: Create Release
+      uses: ncipollo/release-action@v1
+      with:
+        makeLatest: true
+        skipIfReleaseExists: true
+        tag: ${{ steps.info.outputs.tag }}
+        name: ${{ steps.info.outputs.name }}
+        bodyFile: "description.txt"

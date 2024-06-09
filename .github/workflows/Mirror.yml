@@ -34,7 +34,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         makeLatest: true
-        skipIfReleaseExists: true
+        allowUpdates: true
         tag: ${{ steps.info.outputs.tag }}
         name: ${{ steps.info.outputs.name }}
         bodyFile: "description.md"

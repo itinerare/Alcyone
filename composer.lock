@@ -4093,16 +4093,16 @@
         },
         {
             "name": "spatie/laravel-html",
-            "version": "3.10.1",
+            "version": "3.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-html.git",
-                "reference": "c20cc9f6e0b9ef3ae6f5e620b08e69e07695f181"
+                "reference": "94f5900cedc75454800877ace9780e27d6149287"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-html/zipball/c20cc9f6e0b9ef3ae6f5e620b08e69e07695f181",
-                "reference": "c20cc9f6e0b9ef3ae6f5e620b08e69e07695f181",
+                "url": "https://api.github.com/repos/spatie/laravel-html/zipball/94f5900cedc75454800877ace9780e27d6149287",
+                "reference": "94f5900cedc75454800877ace9780e27d6149287",
                 "shasum": ""
             },
             "require": {
@@ -4159,7 +4159,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-html/tree/3.10.1"
+                "source": "https://github.com/spatie/laravel-html/tree/3.11.0"
             },
             "funding": [
                 {
@@ -4167,7 +4167,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-07-15T09:37:42+00:00"
+            "time": "2024-07-16T07:58:45+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",

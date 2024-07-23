@@ -75,7 +75,7 @@ class ImageManager extends Service {
             // Process and save thumbnail from the image
             $manager->read($image->imagePath.'/'.$image->imageFileName)
                 ->scaleDown(height: config('alcyone.settings.thumbnail_height'))
-                ->encode($image->is_gif ? (new GifEncoder()) : (new WebpEncoder(90)))
+                ->encode($image->is_gif ? (new GifEncoder) : (new WebpEncoder(90)))
                 ->save($image->thumbnailPath.'/'.$image->thumbnailFileName);
 
             return $this->commitReturn($image);

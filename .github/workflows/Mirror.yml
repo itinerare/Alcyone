@@ -2,9 +2,8 @@ name: Mirror Release
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - 'main'
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   mirror:
@@ -30,7 +29,7 @@ jobs:
         echo "" >> description.md
         echo "${description}" >> description.md
 
-    - name: Create Release
+    - name: Create/update release
       uses: ncipollo/release-action@v1
       with:
         makeLatest: true

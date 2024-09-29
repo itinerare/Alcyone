@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [2.0.2](https://code.itinerare.net/itinerare/Alcyone/compare/v2.0.1...v2.0.2) (2024-09-29)
+
+### Bug Fixes
+
+
+##### Images
+
+* Add new param to converted image encode ([4f90ed](https://code.itinerare.net/itinerare/Alcyone/commit/4f90ed92d233153878a16b765f1b8e3718e74519))
+
+
+---
+
 ## [2.0.1](https://code.itinerare.net/itinerare/Alcyone/compare/v2.0.0...v2.0.1) (2024-03-31)
 
 ### Bug Fixes

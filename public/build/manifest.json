@@ -3,7 +3,7 @@
     "file": "assets/_commonjsHelpers-725317a4.js"
   },
   "resources/css/app.scss": {
-    "file": "assets/app-4546092f.css",
+    "file": "assets/app-2727f5ca.css",
     "isEntry": true,
     "src": "resources/css/app.scss"
   },
@@ -32,7 +32,7 @@
     "src": "resources/images/prev.png"
   },
   "resources/js/app.js": {
-    "file": "assets/app-cac06d33.js",
+    "file": "assets/app-a9f277ed.js",
     "imports": [
       "__commonjsHelpers-725317a4.js"
     ],

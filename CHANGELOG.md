@@ -4,6 +4,22 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [2.1.0](https://code.itinerare.net/itinerare/Alcyone/compare/v2.0.2...v2.1.0) (2024-10-13)
+
+### Features
+
+* Add error pages ([c305fe](https://code.itinerare.net/itinerare/Alcyone/commit/c305fed00e5ba5f439f4c515b92ebbc8b30ab847))
+
+### Bug Fixes
+
+
+##### Images
+
+* Remove obsolete params from PNG encoding ([07dd50](https://code.itinerare.net/itinerare/Alcyone/commit/07dd50fe06b6e57599ca8f7631a843e37581de3d))
+
+
+---
+
 ## [2.0.2](https://code.itinerare.net/itinerare/Alcyone/compare/v2.0.1...v2.0.2) (2024-09-29)
 
 ### Bug Fixes

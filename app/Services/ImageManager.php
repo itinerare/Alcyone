@@ -74,7 +74,7 @@ class ImageManager extends Service {
 
             // Process and save thumbnail from the image
             $manager->read($image->imagePath.'/'.$image->imageFileName)
-                ->scaleDown(height: config('alcyone.settings.thumbnail_height'))
+                ->scaleDown(height: (int) config('alcyone.settings.thumbnail_height'))
                 ->encode($image->is_gif ? (new GifEncoder) : (new WebpEncoder(90)))
                 ->save($image->thumbnailPath.'/'.$image->thumbnailFileName);
 
@@ -121,8 +121,7 @@ class ImageManager extends Service {
                 }
 
                 $manager->read($image->imagePath.'/'.$image->imageFileName)
-                    ->toPng(false, 90)
-                    ->save($image->convertedPath.'/'.$image->convertedFileName);
+                    ->toPng()->save($image->convertedPath.'/'.$image->convertedFileName);
 
                 // Save the expiry time for the cached image
                 $image->update([

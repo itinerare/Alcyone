@@ -120,8 +120,8 @@ class UserNotificationTest extends TestCase {
             'empty'                                 => [0, 0],
             'with notification'                     => [1, 0],
             // At present Alcyone has no other notification types
-            //'with unrelated notif'                  => [0, 1],
-            //'with notification and unrelated notif' => [1, 1],
+            // 'with unrelated notif'                  => [0, 1],
+            // 'with notification and unrelated notif' => [1, 1],
         ];
     }
 

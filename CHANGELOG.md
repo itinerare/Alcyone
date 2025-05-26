@@ -4,6 +4,11 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [2.1.1](https://code.itinerare.net/itinerare/Alcyone/compare/v2.1.0...v2.1.1) (2025-05-26)
+
+
+---
+
 ## [2.1.0](https://code.itinerare.net/itinerare/Alcyone/compare/v2.0.2...v2.1.0) (2024-10-13)
 
 ### Features
